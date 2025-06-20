@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Vallit – Umfrage‑Ergebnisse</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      padding: 8px 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background: #f2f5f7;
+      font-weight: 600;
+    }
+    tr:nth-child(even) { background: #fafafa; }
+  </style>
+</head>
+<body>
+  <div id="loginBox">
+    <p>Passwort? Freunde‑Zugang</p>
+    <input type="password" id="pw" placeholder="Passwort" />
+    <button id="go">Los</button>
+  </div>
+  <main hidden>
+    <h1>Umfrage‑Ergebnisse (lokal)</h1>
+
+    <table id="resultsTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Zeitstempel</th>
+          <th>Bewertungen&nbsp;c01–c07</th>
+          <th>Favorit</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <p style="font-size:.8rem;margin-top:.6rem;color:#666;">
+      *Daten werden nur in diesem Browser via <code>localStorage</code> gespeichert.
+    </p>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>
