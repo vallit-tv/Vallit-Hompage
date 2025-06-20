@@ -83,7 +83,8 @@ function renderForm(lang) {
   form.innerHTML = ""; // wipe
 
   let answeredCount = 0;
-  const TOTAL_FIELDS = t.concepts.length + 3 + 1; // 7 ratings + 3 selects + 1 tie‑breaker
+  const extraCount = Object.keys(t.extra).filter(k => k.endsWith('Q')).length;
+  const TOTAL_FIELDS = t.concepts.length + extraCount + 1; // ratings + selects + tie‑breaker
   updateProgress();
 
   /* --- concept cards --- */
