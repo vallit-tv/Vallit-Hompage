@@ -249,19 +249,18 @@ function renderForm(lang) {
 }
 
 // ---- night‑mode toggle ----
-const darkSwitch = document.getElementById("darkSwitch");
-function initDark(){
-  if(darkSwitch.checked){
-    document.body.classList.add("dark");
-    localStorage.setItem("vallitDark","1");
-  }else{
-    document.body.classList.remove("dark");
-    localStorage.setItem("vallitDark","0");
-  }
+const darkToggle = document.getElementById("darkToggle");
+function syncDark(){
+  const on = document.body.classList.contains("dark");
+  localStorage.setItem("vallitDark", on ? "1" : "0");
 }
-darkSwitch.checked = localStorage.getItem("vallitDark")==="1";
-initDark();
-darkSwitch.addEventListener("change", initDark);
+if(localStorage.getItem("vallitDark") === "1")
+  document.body.classList.add("dark");
+syncDark();
+darkToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  syncDark();
+});
 
 // scroll animations for cards
 function setupScrollAnims(){
