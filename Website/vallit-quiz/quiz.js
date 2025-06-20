@@ -1,45 +1,57 @@
 // -------- config ----------
 const TEXT = {
   en: {
-    title: "Blind Tech-Concept Survey",
-    likertLegend: "Rate how eager you’d be to watch:",
+    title: "Help pick the next Vallit video",
+    intro: "Hey! We're about to film a new Vallit episode and need your quick feedback. This survey takes under 2 minutes – there are no wrong answers. All replies are anonymous and help us choose the most exciting topic.",
+    progressInfo: "~8 questions, < 2 min",
+    likertLegend: "How interesting do you find this idea?",
     likertScale: ["1","2","3","4","5"],
     concepts: [
-      "An AI voice clone pulls off a phone-bank heist in under a minute.",
-      "A social-media app secretly scores your emotions to keep you scrolling.",
-      "The next-gen language model plans tasks on its own—no human prompt.",
-      "Fast-fashion apps use game mechanics so you spend more than you planned.",
-      "Your casual phone chat becomes ad gold after data brokers sell it for cents.",
-      "A brain implant lets someone type homework purely by thought.",
-      "A hidden PC driver boots cheaters in 20 milliseconds."
+      "A cloned AI voice calls your mom and drains the bank account.",
+      "An app secretly reads your mood so you keep scrolling forever.",
+      "The next AI plans tasks completely without a prompt.",
+      "Fast-fashion apps use game tricks so you buy even more.",
+      "Your chat logs get sold for pennies and turn you into an ad target.",
+      "A brain implant writes homework from pure thoughts.",
+      "A hidden PC driver kicks cheaters in 20 milliseconds."
     ],
-    tiebreak: "If you could watch only one right now, choose it:",
-    submit: "Submit",
-    thanks: "Thanks for helping Vallit decide! 👋"
+    tiebreak: "Which topic would you watch right now if you had to pick one?",
+    submit: "Submit answers",
+    thanks: "Thanks! We'll let you know when the winner is online.",
+    extra: {
+        freqQ: "How often do you watch tech explainers?",
+        freqA: ["daily","several per week","once a week","rarely"],
+        lenQ: "What video length do you prefer?",
+        lenA: ["under 8 min","8–15 min","15–25 min","doesn't matter"],
+        platQ: "Where do you watch tech videos most?",
+        platA: ["YouTube","TikTok","Instagram","Other"]
+      }
   },
   de: {
     title: "Blind‑Voting zum nächsten Vallit‑Video",
-    likertLegend: "Wie sehr reizt dich das Thema?",
+    intro: "Hey! Wir möchten bald ein neues Vallit‑Video veröffentlichen und brauchen dein spontanes Feedback. Die Umfrage dauert unter 2 Minuten – es gibt keine falschen Antworten. Alle Angaben bleiben anonym und helfen uns, das spannendste Thema auszuwählen.",
+    progressInfo: "∼ 8 Fragen, < 2 Min",
+    likertLegend: "Wie spannend findest du diese Idee?",
     likertScale: ["1","2","3","4","5"],
     concepts: [
-      "Eine KI-Stimmenkopie räumt per Telefonbank in Sekunden dein Konto leer.",
-      "Eine Social‑Media‑App bewertet heimlich deine Stimmung, um dich festzuhalten.",
-      "Ein Sprachmodell plant Aufgaben ganz ohne menschliche Eingabe.",
-      "Fast‑Fashion‑Apps nutzen Spielmechaniken, damit du mehr kaufst als geplant.",
-      "Dein Handy‑Chat wird für Centbeträge verkauft und macht dich zum Werbeziel.",
-      "Ein Hirnimplantat schreibt Hausaufgaben allein durch Gedanken.",
-      "Ein versteckter PC‑Treiber wirft Cheater in 20 ms aus Matches."
+      "Eine KI-Stimme ruft bei Mama an und leert das Konto.",
+      "Eine App misst heimlich deine Laune, um dich endlos scrollen zu lassen.",
+      "Die nächste KI plant Aufgaben ganz ohne Prompt.",
+      "Fast-Fashion-Apps setzen Spielmechaniken ein, damit du mehr kaufst.",
+      "Dein Handy-Chat wird für Centbeträge verkauft – und du wirst zur Zielgruppe.",
+      "Ein Hirn-Implantat schreibt Hausaufgaben allein durch Gedanken.",
+      "Ein versteckter PC-Treiber wirft Cheater in 20 ms aus dem Match."
     ],
-    tiebreak: "Wenn du nur eines wählen dürftest – welches?",
-    submit: "Abschicken",
-    thanks: "Danke fürs Mitmachen! 👋"
-    , extra: {
-        freqQ: "Wie oft schaust du Erklärvideos?",
-        freqA: ["Täglich","Mehrmals/Woche","Selten"],
+    tiebreak: "Welches Thema würdest du jetzt sofort anschauen, wenn du dich für eins entscheiden müsstest?",
+    submit: "Antworten absenden",
+    thanks: "🎉 Danke! Wir melden uns, wenn das Sieger-Thema online geht.",
+    extra: {
+        freqQ: "Wie oft schaust du Tech-Erklärvideos?",
+        freqA: ["täglich","mehrmals pro Woche","einmal pro Woche","selten"],
         lenQ: "Welche Videolänge findest du ideal?",
-        lenA: ["< 8 Min","8–15 Min","> 15 Min"],
-        platQ: "Wo schaust du Tech‑Videos am liebsten?",
-        platA: ["YouTube","TikTok","Instagram"]
+        lenA: ["unter 8 Min","8–15 Min","15–25 Min","egal"],
+        platQ: "Auf welcher Plattform schaust du Tech-Videos am häufigsten?",
+        platA: ["YouTube","TikTok","Instagram","Anderes"]
       }
   }
 };
@@ -80,10 +92,13 @@ submit.onclick = e => {
 function renderForm(lang) {
   const t = TEXT[lang];
   document.getElementById("pageTitle").textContent = t.title;
+  document.getElementById("intro").textContent = t.intro;
+  document.getElementById("progressNote").textContent = t.progressInfo;
   form.innerHTML = ""; // wipe
 
   let answeredCount = 0;
-  const TOTAL_FIELDS = t.concepts.length + 3 + 1; // 7 ratings + 3 selects + 1 tie‑breaker
+  const extra = t.extra;
+  const TOTAL_FIELDS = t.concepts.length + (extra ? 3 : 0) + 1; // ratings + selects + tie‑breaker
   updateProgress();
 
   /* --- concept cards --- */
@@ -113,8 +128,8 @@ function renderForm(lang) {
     const legend = document.createElement('div');
     legend.className = 'ratingLabelRow';
     const labels = lang === "de"
-        ? ["skip","meh","okay","gut","muss"]
-        : ["skip","meh","ok","good","must"];
+        ? ["lass ich aus","meh","geht","interessant","muss ich sehen"]
+        : ["skip","meh","ok","interesting","must see"];
     labels.forEach(txt=>{
       const span=document.createElement('span');
       span.textContent = txt;
@@ -126,10 +141,26 @@ function renderForm(lang) {
   });
 
   /* --- extra questions --- */
-  const extra = t.extra;
-  addSelect(extra.freqQ, 'freq', extra.freqA);
-  addSelect(extra.lenQ , 'len',  extra.lenA);
-  addSelect(extra.platQ, 'plat', extra.platA);
+  if (extra) {
+    addSelect(extra.freqQ, 'freq', extra.freqA);
+    addSelect(extra.lenQ , 'len',  extra.lenA);
+    addSelect(extra.platQ, 'plat', extra.platA);
+    // optional free text
+    const wrap = document.createElement('div');
+    wrap.className = 'conceptCard';
+    const p = document.createElement('p');
+    p.className = 'conceptText';
+    p.textContent = lang === 'de'
+        ? 'Gibt es ein Tech-Thema, das dich schon lange interessiert, aber selten erklärt wird?'
+        : 'Is there a tech topic you wish was explained more often?';
+    wrap.appendChild(p);
+    const ta = document.createElement('textarea');
+    ta.name = 'ideaSuggestion';
+    ta.maxLength = 50;
+    ta.placeholder = lang === 'de' ? 'z. B. Datenschutz bei Smart-Homes' : 'e.g. privacy in smart homes';
+    wrap.appendChild(ta);
+    form.appendChild(wrap);
+  }
 
   function addSelect(question, name, options){
     const wrapper = document.createElement('div');
@@ -177,6 +208,9 @@ function renderForm(lang) {
   submit.style.opacity = .5;
   thanks.textContent = t.thanks;
 
+  // animate cards as they scroll into view
+  setupScrollAnims();
+
   function updateProgress(){
     answeredCount = [...form.elements].filter(el=>{
       if(el.type==="radio") return el.checked;
@@ -208,6 +242,20 @@ function initDark(){
 darkSwitch.checked = localStorage.getItem("vallitDark")==="1";
 initDark();
 darkSwitch.addEventListener("change", initDark);
+
+// scroll animations for cards
+function setupScrollAnims(){
+  const cards = document.querySelectorAll('.conceptCard');
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in-view');
+        obs.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.1});
+  cards.forEach(c=>obs.observe(c));
+}
 
 // Fisher–Yates shuffle
 // function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}

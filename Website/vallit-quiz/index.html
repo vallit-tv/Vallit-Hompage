@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <title>Vallit – Themen‑Voting</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -17,7 +17,6 @@
           <option value="de">Deutsch</option>
         </select>
       </label>
-      <span style="width:1.5rem"></span>
       <label class="switch" aria-label="Night‑Mode">
         <input type="checkbox" id="darkSwitch">
         <span class="slider"></span>
@@ -29,13 +28,11 @@
     <div id="progressBar">
       <div id="progressFill"><span id="progressPct">0&nbsp;%</span></div>
     </div>
+    <div id="progressNote"></div>
 
     <h1 id="pageTitle"></h1>
 
-    <p id="intro" class="intro">
-      Diese Umfrage hilft uns, das erste große Vallit‑Video auszuwählen.
-      <br>Bewerte jede Idee ehrlich&nbsp;&ndash;&nbsp;alle Antworten bleiben anonym.
-    </p>
+    <p id="intro" class="intro"></p>
 
     <form id="quizForm"></form>
 
