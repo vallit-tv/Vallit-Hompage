@@ -15,7 +15,15 @@ const TEXT = {
     ],
     tiebreak: "If you could watch only one right now, choose it:",
     submit: "Submit",
-    thanks: "Thanks for helping Vallit decide! 👋"
+    thanks: "Thanks for helping Vallit decide! 👋",
+    extra: {
+        freqQ: "How often do you watch explainer videos?",
+        freqA: ["Daily","Several per week","Rarely"],
+        lenQ: "What's your ideal video length?",
+        lenA: ["< 8 min","8–15 min","> 15 min"],
+        platQ: "Where do you prefer to watch tech videos?",
+        platA: ["YouTube","TikTok","Instagram"]
+      }
   },
   de: {
     title: "Blind‑Voting zum nächsten Vallit‑Video",
@@ -83,7 +91,8 @@ function renderForm(lang) {
   form.innerHTML = ""; // wipe
 
   let answeredCount = 0;
-  const TOTAL_FIELDS = t.concepts.length + 3 + 1; // 7 ratings + 3 selects + 1 tie‑breaker
+  const extra = t.extra;
+  const TOTAL_FIELDS = t.concepts.length + (extra ? 3 : 0) + 1; // ratings + selects + tie‑breaker
   updateProgress();
 
   /* --- concept cards --- */
@@ -126,10 +135,11 @@ function renderForm(lang) {
   });
 
   /* --- extra questions --- */
-  const extra = t.extra;
-  addSelect(extra.freqQ, 'freq', extra.freqA);
-  addSelect(extra.lenQ , 'len',  extra.lenA);
-  addSelect(extra.platQ, 'plat', extra.platA);
+  if (extra) {
+    addSelect(extra.freqQ, 'freq', extra.freqA);
+    addSelect(extra.lenQ , 'len',  extra.lenA);
+    addSelect(extra.platQ, 'plat', extra.platA);
+  }
 
   function addSelect(question, name, options){
     const wrapper = document.createElement('div');
