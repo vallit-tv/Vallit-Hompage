@@ -8,13 +8,13 @@
 </head>
 <body>
   <header class="topbar">
-    <div class="left">
-    </div>
+    <div class="left"></div>
     <div class="right">
+      <a href="admin.html" id="adminLink" title="Admin Panel" target="_blank">⚙️</a>
       <label class="lang">
-        <select id="langSelect">
-          <option value="en" selected>English</option>
-          <option value="de">Deutsch</option>
+        <select id="langSelect" aria-label="Language">
+          <option value="en" selected>EN</option>
+          <option value="de">DE</option>
         </select>
       </label>
       <label class="switch" aria-label="Night‑Mode">
@@ -39,10 +39,6 @@
     <button id="submitBtn"></button>
     <p id="thanks" hidden>Thanks for helping Vallit decide! 👋</p>
 
-    <!-- quick link to results page -->
-    <p style="margin-top:1.5rem;font-size:.8rem;text-align:right;">
-      <a href="admin.html" target="_blank">Admin Panel</a>
-    </p>
   </main>
 
   <script src="quiz.js"></script>

@@ -16,7 +16,6 @@ const TEXT = {
       "How exciting would a video be where someone types text using only their thoughts?",
       "Would you click a video that shows how new anti-cheat systems ban cheaters before their first shot?"
     ],
-    tiebreak: "If you could watch only one of these videos right now, which one would you pick?",
     submit: "Submit answers",
     thanks: "Thanks! We'll let you know when the winner is online.",
     extra: {
@@ -54,7 +53,6 @@ const TEXT = {
       "Wie spannend wäre ein Video, in dem jemand nur mit Gedanken Text schreibt?",
       "Würdest du ein Video anklicken, das zeigt, wie neue Anti-Cheats Cheater vor dem ersten Schuss bannen?"
     ],
-    tiebreak: "Wenn du nur eines dieser Videos sofort schauen könntest – welches wählst du?",
     submit: "Antworten absenden",
     thanks: "🎉 Danke! Wir melden uns, wenn das Sieger-Thema online geht.",
     extra: {
@@ -106,6 +104,8 @@ submit.onclick = e => {
   // UI feedback
   form.hidden = true;
   submit.hidden = true;
+  document.getElementById("pageTitle").hidden = true;
+  document.getElementById("intro").hidden = true;
   thanks.hidden = false;
   console.log("Saved Vallit response:", formData);
 };
@@ -123,8 +123,7 @@ function renderForm(lang) {
   const extra2 = t.extra2;
   const TOTAL_FIELDS = t.concepts.length
                      + (extra ? 3 : 0)
-                     + (extra2 ? 4 : 0)
-                     + 1; // ratings + selects + tie‑breaker
+                     + (extra2 ? 4 : 0);
   updateProgress();
 
   /* --- concept cards --- */
@@ -223,18 +222,6 @@ function renderForm(lang) {
     form.appendChild(wrapper);
   }
 
-  // Tie-breaker
-  const tie = document.createElement("fieldset");
-  const leg = document.createElement("legend"); leg.textContent = t.tiebreak; tie.appendChild(leg);
-  order.forEach(i=>{
-    const r = document.createElement("div"); r.className="row";
-    const radio = document.createElement("input");
-    radio.type="radio"; radio.name="favorite"; radio.value=`c${i}`; radio.required=true;
-    radio.addEventListener("change", updateProgress);
-    const label = document.createElement("span"); label.textContent = t.concepts[i].slice(0,60)+"…";
-    r.append(radio,label); tie.appendChild(r);
-  });
-  form.appendChild(tie);
 
   submit.textContent = t.submit;
   submit.disabled = true;
