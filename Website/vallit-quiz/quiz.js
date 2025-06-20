@@ -83,8 +83,7 @@ function renderForm(lang) {
   form.innerHTML = ""; // wipe
 
   let answeredCount = 0;
-  const TOTAL_FIELDS = t.concepts.length + 3 + 1; // 7 ratings + 3 selects + 1 tie‑breaker
-  updateProgress();
+  let TOTAL_FIELDS = 0;
 
   /* --- concept cards --- */
   const order = [...t.concepts.keys()];
@@ -96,6 +95,11 @@ function renderForm(lang) {
     p.className = "conceptText";
     p.textContent = t.concepts[i];
     card.appendChild(p);
+
+    const q = document.createElement("div");
+    q.className = "likertLegend";
+    q.textContent = t.likertLegend;
+    card.appendChild(q);
 
     const row = document.createElement("div");
     row.className = "ratingRow";
@@ -171,6 +175,10 @@ function renderForm(lang) {
     r.append(radio,label); tie.appendChild(r);
   });
   form.appendChild(tie);
+
+  // count unique fields for progress
+  TOTAL_FIELDS = new Set([...form.elements].map(el => el.name)).size;
+  updateProgress();
 
   submit.textContent = t.submit;
   submit.disabled = true;
