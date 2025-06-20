@@ -2,56 +2,78 @@
 const TEXT = {
   en: {
     title: "Help pick the next Vallit video",
-    intro: "Hey! We're about to film a new Vallit episode and need your quick feedback. This survey takes under 2 minutes – there are no wrong answers. All replies are anonymous and help us choose the most exciting topic.",
-    progressInfo: "~8 questions, < 2 min",
+    intro: "What’s this about? We’re deciding on our next Vallit video. Click through these quick questions—less than two minutes. All answers are anonymous and help us pick the most exciting topic. Thank you! 🙌",
+    progressInfo: "~15 questions, < 2 min",
     likertLegend: "How interesting do you find this idea?",
     likertScale: ["1","2","3","4","5"],
+    scaleLabels: ["not interesting","meh","okay","interesting","super exciting"],
     concepts: [
-      "A cloned AI voice calls your mom and drains the bank account.",
-      "An app secretly reads your mood so you keep scrolling forever.",
-      "The next AI plans tasks completely without a prompt.",
-      "Fast-fashion apps use game tricks so you buy even more.",
-      "Your chat logs get sold for pennies and turn you into an ad target.",
-      "A brain implant writes homework from pure thoughts.",
-      "A hidden PC driver kicks cheaters in 20 milliseconds."
+      "How exciting would you find a video showing how scammers clone your voice to drain your bank account?",
+      "How curious would you be about a video explaining how TikTok and other apps can tell when you’re happy or sad?",
+      "Would you watch a video where next-gen AI plans homework with no human input?",
+      "How interesting is a video revealing the tricks fast-fashion apps use to make us buy more on impulse?",
+      "Does a video about how just 30 cents can buy your entire chat history interest you?",
+      "How exciting would a video be where someone types text using only their thoughts?",
+      "Would you click a video that shows how new anti-cheat systems ban cheaters before their first shot?"
     ],
-    tiebreak: "Which topic would you watch right now if you had to pick one?",
+    tiebreak: "If you could watch only one of these videos right now, which one would you pick?",
     submit: "Submit answers",
     thanks: "Thanks! We'll let you know when the winner is online.",
     extra: {
         freqQ: "How often do you watch tech explainers?",
-        freqA: ["daily","several per week","once a week","rarely"],
+        freqA: ["Daily","Several times a week","Rarely"],
         lenQ: "What video length do you prefer?",
-        lenA: ["under 8 min","8–15 min","15–25 min","doesn't matter"],
-        platQ: "Where do you watch tech videos most?",
+        lenA: ["Under 8 min","8–15 min","Over 15 min"],
+        platQ: "On which platform do you watch such videos most often?",
         platA: ["YouTube","TikTok","Instagram","Other"]
+      },
+    extra2: {
+        techLvlQ: "How interested are you in tech topics overall?",
+        techLvlA: ["Not at all","A bit","Quite","Super into it"],
+        learningStyleQ: "What helps you understand best?",
+        learningStyleA: ["Graphics","Everyday examples","Humorous analogies"],
+        paceQ: "At what pace do you prefer explainer videos?",
+        paceA: ["Slow & thorough","Medium","Fast & punchy"],
+        ctaQ: "What do you usually do after a good explainer?",
+        ctaA: ["Share it","Discuss it","Try something","Nothing"]
       }
   },
   de: {
     title: "Blind‑Voting zum nächsten Vallit‑Video",
-    intro: "Hey! Wir möchten bald ein neues Vallit‑Video veröffentlichen und brauchen dein spontanes Feedback. Die Umfrage dauert unter 2 Minuten – es gibt keine falschen Antworten. Alle Angaben bleiben anonym und helfen uns, das spannendste Thema auszuwählen.",
-    progressInfo: "∼ 8 Fragen, < 2 Min",
+    intro: "Worum geht’s? Wir planen unser nächstes Vallit-Video. Klick dich kurz durch die Fragen – dauert unter zwei Minuten. Deine Antworten bleiben anonym und helfen uns, das spannendste Thema auszuwählen. Vielen Dank! 🙌",
+    progressInfo: "∼ 15 Fragen, < 2 Min",
     likertLegend: "Wie spannend findest du diese Idee?",
     likertScale: ["1","2","3","4","5"],
+    scaleLabels: ["uninteressant","eher nicht","okay","spannend","extrem spannend"],
     concepts: [
-      "Eine KI-Stimme ruft bei Mama an und leert das Konto.",
-      "Eine App misst heimlich deine Laune, um dich endlos scrollen zu lassen.",
-      "Die nächste KI plant Aufgaben ganz ohne Prompt.",
-      "Fast-Fashion-Apps setzen Spielmechaniken ein, damit du mehr kaufst.",
-      "Dein Handy-Chat wird für Centbeträge verkauft – und du wirst zur Zielgruppe.",
-      "Ein Hirn-Implantat schreibt Hausaufgaben allein durch Gedanken.",
-      "Ein versteckter PC-Treiber wirft Cheater in 20 ms aus dem Match."
+      "Wie spannend fändest du ein Video, das zeigt, wie Betrüger deine Stimme kopieren und dein Bankkonto plündern?",
+      "Wie neugierig wärst du auf ein Video, das erklärt, warum TikTok & Co. genau wissen, wann du gute oder schlechte Laune hast?",
+      "Würdest du dir ansehen, wie die nächste KI Hausaufgaben plant, ohne dass jemand ihr etwas eingibt?",
+      "Wie interessant findest du ein Video, das zeigt, welche Tricks Fast-Fashion-Apps nutzen, um uns spontan mehr kaufen zu lassen?",
+      "Reizt dich ein Video darüber, wie 30 Cent reichen, um deinen gesamten Chat-Verlauf zu kaufen?",
+      "Wie spannend wäre ein Video, in dem jemand nur mit Gedanken Text schreibt?",
+      "Würdest du ein Video anklicken, das zeigt, wie neue Anti-Cheats Cheater vor dem ersten Schuss bannen?"
     ],
-    tiebreak: "Welches Thema würdest du jetzt sofort anschauen, wenn du dich für eins entscheiden müsstest?",
+    tiebreak: "Wenn du nur eines dieser Videos sofort schauen könntest – welches wählst du?",
     submit: "Antworten absenden",
     thanks: "🎉 Danke! Wir melden uns, wenn das Sieger-Thema online geht.",
     extra: {
         freqQ: "Wie oft schaust du Tech-Erklärvideos?",
-        freqA: ["täglich","mehrmals pro Woche","einmal pro Woche","selten"],
+        freqA: ["Täglich","Mehrmals pro Woche","Selten"],
         lenQ: "Welche Videolänge findest du ideal?",
-        lenA: ["unter 8 Min","8–15 Min","15–25 Min","egal"],
-        platQ: "Auf welcher Plattform schaust du Tech-Videos am häufigsten?",
-        platA: ["YouTube","TikTok","Instagram","Anderes"]
+        lenA: ["Unter 8 Min","8–15 Min","Über 15 Min"],
+        platQ: "Auf welcher Plattform schaust du solche Videos am häufigsten?",
+        platA: ["YouTube","TikTok","Instagram","Andere"]
+      },
+    extra2: {
+        techLvlQ: "Wie sehr interessierst du dich allgemein für Technik-Themen?",
+        techLvlA: ["Gar nicht","Ein bisschen","Ziemlich","Extrem"],
+        learningStyleQ: "Was hilft dir beim Verstehen am meisten?",
+        learningStyleA: ["Grafiken","Beispiele aus dem Alltag","Humorvolle Vergleiche"],
+        paceQ: "In welchem Tempo magst du Erklärvideos?",
+        paceA: ["Langsam & gründlich","Mittel","Schnell & knackig"],
+        ctaQ: "Was machst du nach einem guten Erklärvideo am liebsten?",
+        ctaA: ["Teile es","Diskutiere drüber","Teste etwas aus","Nichts"]
       }
   }
 };
@@ -97,8 +119,12 @@ function renderForm(lang) {
   form.innerHTML = ""; // wipe
 
   let answeredCount = 0;
-  const extra = t.extra;
-  const TOTAL_FIELDS = t.concepts.length + (extra ? 3 : 0) + 1; // ratings + selects + tie‑breaker
+  const extra  = t.extra;
+  const extra2 = t.extra2;
+  const TOTAL_FIELDS = t.concepts.length
+                     + (extra ? 3 : 0)
+                     + (extra2 ? 4 : 0)
+                     + 1; // ratings + selects + tie‑breaker
   updateProgress();
 
   /* --- concept cards --- */
@@ -127,9 +153,9 @@ function renderForm(lang) {
 
     const legend = document.createElement('div');
     legend.className = 'ratingLabelRow';
-    const labels = lang === "de"
+    const labels = t.scaleLabels || (lang === "de"
         ? ["lass ich aus","meh","geht","interessant","muss ich sehen"]
-        : ["skip","meh","ok","interesting","must see"];
+        : ["skip","meh","ok","interesting","must see"]);
     labels.forEach(txt=>{
       const span=document.createElement('span');
       span.textContent = txt;
@@ -151,15 +177,22 @@ function renderForm(lang) {
     const p = document.createElement('p');
     p.className = 'conceptText';
     p.textContent = lang === 'de'
-        ? 'Gibt es ein Tech-Thema, das dich schon lange interessiert, aber selten erklärt wird?'
-        : 'Is there a tech topic you wish was explained more often?';
+        ? 'Welches Technik-Thema findest du noch viel zu wenig erklärt?'
+        : 'Which tech topic do you feel is still rarely explained?';
     wrap.appendChild(p);
     const ta = document.createElement('textarea');
     ta.name = 'ideaSuggestion';
     ta.maxLength = 50;
-    ta.placeholder = lang === 'de' ? 'z. B. Datenschutz bei Smart-Homes' : 'e.g. privacy in smart homes';
+    ta.placeholder = lang === 'de' ? 'z. B. Datenschutz bei Smart-Homes' : 'e.g. Smart-home privacy';
     wrap.appendChild(ta);
     form.appendChild(wrap);
+  }
+
+  if (extra2) {
+    addSelect(extra2.techLvlQ, 'techLvl', extra2.techLvlA);
+    addSelect(extra2.learningStyleQ, 'learningStyle', extra2.learningStyleA);
+    addSelect(extra2.paceQ, 'pace', extra2.paceA);
+    addSelect(extra2.ctaQ, 'cta', extra2.ctaA);
   }
 
   function addSelect(question, name, options){
