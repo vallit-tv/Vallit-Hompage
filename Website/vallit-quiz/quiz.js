@@ -5,13 +5,13 @@ const TEXT = {
     likertLegend: "Rate how eager you’d be to watch:",
     likertScale: ["1","2","3","4","5"],
     concepts: [
-      "An AI voice clone pulls off a phone-bank heist in under a minute.",
-      "A social-media app secretly scores your emotions to keep you scrolling.",
-      "The next-gen language model plans tasks on its own—no human prompt.",
-      "Fast-fashion apps use game mechanics so you spend more than you planned.",
-      "Your casual phone chat becomes ad gold after data brokers sell it for cents.",
-      "A brain implant lets someone type homework purely by thought.",
-      "A hidden PC driver boots cheaters in 20 milliseconds."
+      "Would you watch a video about an AI voice clone pulling off a phone-bank heist in under a minute?",
+      "Are you curious how a social-media app secretly scores your emotions to keep you scrolling?",
+      "Should we explore a next-gen language model that plans tasks on its own—no human prompt?",
+      "Would you see how fast-fashion apps use game mechanics so you spend more than planned?",
+      "Do you care about your casual phone chat becoming ad gold after data brokers sell it for cents?",
+      "How cool would a brain implant be that lets someone type homework purely by thought?",
+      "Want to see a hidden PC driver that boots cheaters in 20 milliseconds?"
     ],
     tiebreak: "If you could watch only one right now, choose it:",
     submit: "Submit",
@@ -22,13 +22,13 @@ const TEXT = {
     likertLegend: "Wie sehr reizt dich das Thema?",
     likertScale: ["1","2","3","4","5"],
     concepts: [
-      "Eine KI-Stimmenkopie räumt per Telefonbank in Sekunden dein Konto leer.",
-      "Eine Social‑Media‑App bewertet heimlich deine Stimmung, um dich festzuhalten.",
-      "Ein Sprachmodell plant Aufgaben ganz ohne menschliche Eingabe.",
-      "Fast‑Fashion‑Apps nutzen Spielmechaniken, damit du mehr kaufst als geplant.",
-      "Dein Handy‑Chat wird für Centbeträge verkauft und macht dich zum Werbeziel.",
-      "Ein Hirnimplantat schreibt Hausaufgaben allein durch Gedanken.",
-      "Ein versteckter PC‑Treiber wirft Cheater in 20 ms aus Matches."
+      "Möchtest du sehen, wie eine KI-Stimmenkopie per Telefonbank in Sekunden dein Konto leert?",
+      "Interessiert es dich, wie eine Social‑Media‑App heimlich deine Stimmung bewertet?",
+      "Sollen wir zeigen, wie ein Sprachmodell Aufgaben ohne menschliche Eingabe plant?",
+      "Willst du erfahren, wie Fast‑Fashion‑Apps Spielmechaniken nutzen, damit du mehr kaufst als geplant?",
+      "Findest du spannend, dass dein Handy‑Chat für Centbeträge verkauft wird und dich zum Werbeziel macht?",
+      "Wie spannend wäre ein Hirnimplantat, das Hausaufgaben allein durch Gedanken schreibt?",
+      "Hättest du Lust auf ein Video über einen versteckten PC‑Treiber, der Cheater in 20 ms aus Matches wirft?"
     ],
     tiebreak: "Wenn du nur eines wählen dürftest – welches?",
     submit: "Abschicken",
@@ -83,8 +83,7 @@ function renderForm(lang) {
   form.innerHTML = ""; // wipe
 
   let answeredCount = 0;
-  const TOTAL_FIELDS = t.concepts.length + 3 + 1; // 7 ratings + 3 selects + 1 tie‑breaker
-  updateProgress();
+  let TOTAL_FIELDS = 0;
 
   /* --- concept cards --- */
   const order = [...t.concepts.keys()];
@@ -171,6 +170,12 @@ function renderForm(lang) {
     r.append(radio,label); tie.appendChild(r);
   });
   form.appendChild(tie);
+
+  const requiredNames = new Set([...form.elements].filter(el =>
+    (el.type === "radio" || el.tagName === "SELECT") && el.required
+  ).map(el => el.name));
+  TOTAL_FIELDS = requiredNames.size;
+  updateProgress();
 
   submit.textContent = t.submit;
   submit.disabled = true;

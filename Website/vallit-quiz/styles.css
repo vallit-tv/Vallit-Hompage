@@ -93,6 +93,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: "Inter", system-ui, sans-serif;
+  padding-top: 6px; /* space for fixed progress bar */
 }
 header, main, footer { margin: 0 auto; }
 main { max-width: 1000px; width: 94%; }
@@ -209,8 +210,15 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   gap: 1.5rem;
 }
 
+.topbar .divider {
+  width: 1px;
+  height: 20px;
+  background: var(--border);
+  display: inline-block;
+}
+
 #progressBar {
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 5;
   width: 100%;
