@@ -1,21 +1,18 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Vallit – Home</title>
+  <title>Vallit – Themen‑Voting</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="topbar">
-    <nav class="mainnav">
-      <a href="index.html" class="nav-logo">Vallit</a>
-      <a href="videos.html">Videos</a>
-      <a href="team.html">Team</a>
-      <a href="articles.html">Artikel</a>
-      <a href="quiz.html">Voting</a>
-    </nav>
     <div class="right">
+      <div id="langToggle" class="segmented">
+        <button data-lang="en" class="active">EN</button>
+        <button data-lang="de">DE</button>
+      </div>
       <div id="darkToggle" class="segmented" aria-label="Night mode">
         <button data-mode="light" class="sun active">
           <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -29,7 +26,7 @@
           </svg>
         </button>
       </div>
-      <a href="admin.html" id="adminLink" class="icon-btn" title="Mitarbeiter Zugang" target="_blank" aria-label="Mitarbeiter Zugang">
+      <a href="admin.html" id="adminLink" class="icon-btn" title="Mitarbeiter Zugang" aria-label="Mitarbeiter Zugang" target="_blank">
         <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M17 20h5v-2a4 4 0 00-4-4h-1M9 20H4v-2a4 4 0 014-4h1m6-4a4 4 0 11-8 0 4 4 0 018 0zm6 4a4 4 0 10-8 0 4 4 0 008 0z"/>
         </svg>
@@ -37,23 +34,23 @@
     </div>
   </header>
 
-  <main class="content">
-    <section class="hero">
-      <h1>Willkommen bei Vallit</h1>
-      <p>Hier findest du alle Infos zu unserem YouTube-Kanal, unsere neuesten Videos und spannende Artikel zu Technik-Themen.</p>
-    </section>
-    <section>
-      <h2>Aktuelles Video</h2>
-      <div class="video-wrap">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video" frameborder="0" allowfullscreen></iframe>
-      </div>
-    </section>
+  <main>
+    <div id="progressBar">
+      <div id="progressFill"><span id="progressPct">0&nbsp;%</span></div>
+    </div>
+    <div id="progressNote"></div>
+
+    <h1 id="pageTitle"></h1>
+
+    <p id="intro" class="intro"></p>
+
+    <form id="quizForm"></form>
+
+    <button id="submitBtn"></button>
+    <p id="thanks" hidden>Thanks for helping Vallit decide! 👋</p>
+
   </main>
 
-  <footer class="site-footer">
-    <a href="impressum.html">Impressum</a>
-  </footer>
-
-  <script src="site.js"></script>
+  <script src="quiz.js"></script>
 </body>
 </html>

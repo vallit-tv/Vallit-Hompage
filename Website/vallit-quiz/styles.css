@@ -290,3 +290,52 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   margin-bottom: 1.4rem;
   padding-inline: 2vw;
 }
+/* --- site layout additions --- */
+.mainnav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.nav-logo {
+  font-weight: 600;
+  margin-right: 2rem;
+  text-decoration: none;
+  color: var(--text);
+}
+.mainnav a {
+  text-decoration: none;
+  color: var(--text);
+  font-size: .95rem;
+}
+.mainnav a:hover {
+  text-decoration: underline;
+}
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2vw;
+}
+.hero {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.video-wrap {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+}
+.video-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.site-footer {
+  margin-top: 3rem;
+  padding: 1rem 2vw;
+  text-align: center;
+  font-size: .85rem;
+}
