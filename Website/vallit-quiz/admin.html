@@ -20,6 +20,25 @@
       font-weight: 600;
     }
     tr:nth-child(even) { background: #fafafa; }
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 8px;
+      max-width: 480px;
+      width: 90%;
+    }
+    #detailBox { white-space: pre-wrap; font-family: monospace; }
   </style>
 </head>
 <body>
@@ -28,7 +47,6 @@
       <a href="index.html" class="nav-logo">Vallit</a>
       <a href="videos.html" data-i18n="navVideos">Videos</a>
       <a href="team.html" data-i18n="navTeam">Team</a>
-      <a href="articles.html" data-i18n="navArticles">Artikel</a>
       <a href="quiz.html" data-i18n="navQuiz">Voting</a>
     </nav>
     <div class="right">
@@ -66,12 +84,18 @@
         <tr>
           <th>#</th>
           <th>Zeitstempel</th>
-          <th>Bewertungen&nbsp;c01–c07</th>
-          <th>Favorit</th>
+          <th>Details</th>
         </tr>
       </thead>
       <tbody></tbody>
     </table>
+
+    <div id="detailModal" class="modal" hidden>
+      <div class="modal-content">
+        <button id="closeModal" class="icon-btn" aria-label="Close">×</button>
+        <pre id="detailBox"></pre>
+      </div>
+    </div>
 
     <p style="font-size:.8rem;margin-top:.6rem;color:#666;">
       *Daten werden nur in diesem Browser via <code>localStorage</code> gespeichert.
@@ -79,7 +103,7 @@
   </main>
 
   <footer class="site-footer">
-    <a href="impressum.html" data-i18n="impressumLink">Impressum</a>
+    <a href="impressum.html" class="impressum-link" data-i18n="impressumLink">Impressum</a>
   </footer>
 
   <script src="admin.js"></script>

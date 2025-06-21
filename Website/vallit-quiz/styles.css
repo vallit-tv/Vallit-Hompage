@@ -377,3 +377,14 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   box-shadow: 0 4px 12px rgba(0,0,0,.05);
   line-height: 1.6;
 }
+
+.impressum-link {
+  text-decoration: none;
+  border: 1px solid var(--border);
+  padding: .4rem .8rem;
+  border-radius: 6px;
+  color: var(--text);
+}
+.impressum-link:hover {
+  background: var(--border);
+}

@@ -6,20 +6,16 @@ const I18N = {
   en: {
     navVideos: "Videos",
     navTeam: "Team",
-    navArticles: "Articles",
     navQuiz: "Voting",
     heroTitle: "Welcome to Vallit",
     heroDesc:
-      "Here you'll find info about our YouTube channel, our newest videos and exciting tech articles.",
+      "Learn about our YouTube channel and browse the latest videos—each with a short article and all sources.",
     currentVideo: "Current Video",
     videosTitle: "Our Videos",
-    videosDesc: "Sources for this video are in the description on YouTube.",
-    articlesTitle: "Articles",
-    articlesDesc:
-      "Check back soon for interesting posts and resources around our videos.",
+    videosDesc: "Sources for every video are linked in its article and description.",
     teamTitle: "Our Team",
-    teamDesc: "This page will list everyone involved at Vallit.",
-    impressumLink: "Imprint",
+    teamDesc: "We're preparing an overview of everyone at Vallit. Check back soon!",
+    impressumLink: "Legal Notice",
     loginHeading: "Employee Access",
     loginPrompt: "Please enter password",
     loginButton: "Log in",
@@ -29,21 +25,17 @@ const I18N = {
   de: {
     navVideos: "Videos",
     navTeam: "Team",
-    navArticles: "Artikel",
     navQuiz: "Voting",
     heroTitle: "Willkommen bei Vallit",
     heroDesc:
-      "Hier findest du alle Infos zu unserem YouTube-Kanal, unsere neuesten Videos und spannende Artikel zu Technik-Themen.",
+      "Hier findest du Infos zu unserem YouTube-Kanal und unsere neuesten Videos. Zu jedem Video gibt es einen kurzen Artikel mit Quellen.",
     currentVideo: "Aktuelles Video",
     videosTitle: "Unsere Videos",
     videosDesc:
-      "Quellen zum Video findest du in der Videobeschreibung auf YouTube.",
-    articlesTitle: "Artikel",
-    articlesDesc:
-      "In Zukunft findest du hier spannende Beiträge und Quellen rund um unsere Videos.",
+      "Die Quellen zu jedem Video stehen im Artikel und in der Videobeschreibung.",
     teamTitle: "Unser Team",
     teamDesc:
-      "Hier entsteht eine Übersicht über alle Teammitglieder von Vallit.",
+      "Diese Seite befindet sich im Aufbau. Bald stellen wir hier unser Team vor.",
     impressumLink: "Impressum",
     loginHeading: "Mitarbeiter-Zugang",
     loginPrompt: "Bitte Passwort eingeben",

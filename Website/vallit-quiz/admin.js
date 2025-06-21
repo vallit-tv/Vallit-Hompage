@@ -10,6 +10,9 @@ const mainEl = document.querySelector("main");
 const pwIn   = document.getElementById("pw");
 const goBtn  = document.getElementById("go");
 const tbody  = document.querySelector("#resultsTable tbody");
+const modal  = document.getElementById("detailModal");
+const detailBox = document.getElementById("detailBox");
+const closeBtn = document.getElementById("closeModal");
 
 goBtn.addEventListener("click", () => {
   if (pwIn.value === PASS) {
@@ -30,26 +33,35 @@ function render() {
 
   if (stored.length === 0) {
     tbody.innerHTML =
-      '<tr><td colspan="4" style="text-align:center;color:#777;">Keine Antworten gespeichert.</td></tr>';
+      '<tr><td colspan="3" style="text-align:center;color:#777;">Keine Antworten gespeichert.</td></tr>';
     return;
   }
 
   stored.forEach((row, idx) => {
     const tr = document.createElement("tr");
     const date = new Date(row.timestamp).toLocaleString();
-
     tr.innerHTML = `
       <td>${idx + 1}</td>
       <td>${date}</td>
-      <td>${[
-        row.c0 ?? "-", row.c1 ?? "-", row.c2 ?? "-",
-        row.c3 ?? "-", row.c4 ?? "-", row.c5 ?? "-", row.c6 ?? "-"
-      ].join(" / ")}</td>
-      <td>${row.favorite ?? "-"}</td>
+      <td><button class="viewBtn" data-idx="${idx}">View</button></td>
     `;
     tbody.appendChild(tr);
   });
 }
+
+tbody.addEventListener("click", (e) => {
+  const btn = e.target.closest(".viewBtn");
+  if (!btn) return;
+  const stored = JSON.parse(localStorage.getItem(KEY) || "[]");
+  const data = stored[btn.dataset.idx];
+  if (!data) return;
+  detailBox.textContent = JSON.stringify(data, null, 2);
+  modal.hidden = false;
+});
+
+closeBtn.addEventListener("click", () => {
+  modal.hidden = true;
+});
 
 /* live‑update if another tab stores new responses */
 window.addEventListener("storage", e => {
