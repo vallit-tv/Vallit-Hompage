@@ -237,6 +237,9 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   margin: 20px 0;
   height: var(--topbar-h);
   padding-inline: 2vw;
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: barIn .5s forwards;
 }
 .topbar .right {
   display: flex;
@@ -338,4 +341,39 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   padding: 1rem 2vw;
   text-align: center;
   font-size: .85rem;
+}
+
+@keyframes barIn {
+  to { opacity: 1; transform: none; }
+}
+
+#loginBox {
+  max-width: 340px;
+  margin: 4rem auto;
+  padding: 2rem;
+  text-align: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.05);
+}
+#loginBox input {
+  width: 100%;
+  padding: .6rem;
+  margin-top: .6rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text);
+}
+#loginBox button { margin-top: 1rem; }
+
+/* impressum box */
+.legal-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.6rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,.05);
+  line-height: 1.6;
 }
