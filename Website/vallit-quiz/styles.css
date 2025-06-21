@@ -6,6 +6,7 @@
   --text: #111;
   --border: #dcdfe2;
   --accent: #0a84ff; /* calmer blue */
+  --topbar-h: 56px;
 }
 body.dark {
   --bg: #0f1113;
@@ -48,19 +49,21 @@ legend      { font-weight: 600; margin-bottom: .6rem; }
   transform: translateY(-6px);
   box-shadow: 0 10px 24px rgba(0,0,0,.08);
 }
-.conceptText { font-size: .95rem; line-height: 1.4; }
-.ratingRow   { margin-top: .6rem; display: flex; gap: .5rem; }
-.ratingRow input[type=radio]::before {
-  content: attr(value);
-  position: absolute;
-  top: -22px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: .7rem;
-  color: var(--text);
+.conceptText { font-size: .95rem; line-height: 1.4; margin-bottom: .6rem; }
+.ratingRow {
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  gap: .5rem;
+  justify-items: center;
+  margin-top: 2rem;
 }
-
-.ratingRow input[type=radio] {
+.ratingOption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ratingNum { font-size: .75rem; margin-bottom: .3rem; color: var(--text); }
+.ratingOption input[type=radio] {
   appearance: none;
   width: 16px;
   height: 16px;
@@ -69,7 +72,7 @@ legend      { font-weight: 600; margin-bottom: .6rem; }
   cursor: pointer;
   position: relative;
 }
-.ratingRow input[type=radio]:checked::after {
+.ratingOption input[type=radio]:checked::after {
   content: "";
   position: absolute;
   top: 3px;
@@ -81,11 +84,13 @@ legend      { font-weight: 600; margin-bottom: .6rem; }
 }
 
 .ratingLabelRow {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
   gap: .5rem;
   font-size: .75rem;
-  margin-top: .2rem;
+  margin-top: .4rem;
   color: var(--text);
+  text-align: center;
 }
 
 .toggle {
@@ -101,43 +106,114 @@ legend      { font-weight: 600; margin-bottom: .6rem; }
   padding-inline: 2vw;
 }
 
-/* night switch with icons */
-.switch { position: relative; display:inline-block; width:50px; height:28px; }
-.switch input { opacity:0; width:0; height:0; }
-.slider {
-  position: absolute; inset:0;
-  background:#ccc; border-radius:34px; transition:.3s;
+/* icon buttons */
+.icon-btn {
+  background: none;
+  border: none;
+  padding: .4rem;
+  cursor: pointer;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity .2s, transform .2s;
 }
-.slider:after {
-  content:"🌙"; position:absolute; height:22px; width:22px;
-  left:3px; top:3px; background:#fff; border-radius:50%; transition:.3s;
-  display:flex; align-items:center; justify-content:center; font-size:14px;
+.icon-btn:hover { opacity: .8; transform: translateY(-2px); }
+.icon-btn svg { width: 22px; height: 22px; stroke: currentColor; fill: none; }
+
+/* segmented toggle buttons */
+.segmented {
+  position: relative;
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--card);
 }
-.switch input:checked + .slider { background: var(--accent); }
-.switch input:checked + .slider:after {
-  transform: translateX(22px);
-  content: "☀";
+
+.segmented button {
+  flex: 1;
+  padding: .3rem .6rem;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .2rem;
+  transition: color .2s;
+  z-index: 1;
+}
+
+.segmented::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+  transition: transform .25s;
+  transform: translateX(var(--seg-x,0));
+}
+
+.segmented button.active {
+  color: #fff;
+}
+.segmented button:not(.active):hover {
+  background: rgba(0,0,0,.05);
+}
+body.dark .segmented button:not(.active):hover {
+  background: rgba(255,255,255,.1);
+}
+.segmented svg { width: 20px; height: 20px; stroke: currentColor; fill: none; }
+
+.selectWrap { position: relative; display:inline-block; }
+.selectWrap::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  right: .8rem;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid var(--text);
+  border-bottom: 2px solid var(--text);
+  transform: translateY(-60%) rotate(45deg);
+  transition: transform .2s;
+}
+
+.selectWrap:focus-within::after {
+  transform: translateY(-60%) rotate(45deg) scale(1.2);
 }
 
 select {
-  padding: .5rem .8rem;
+  appearance: none;
+  padding: .3rem .6rem;
+  padding-right: 1.8rem;
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 20px;
   background: var(--card);
   color: var(--text);
-  font-size: .9rem;
+  font-size: .85rem;
+  transition: background .3s, color .3s, border-color .2s;
 }
 select:focus { outline: none; border-color: var(--accent); }
 
 textarea {
   width: 100%;
+  box-sizing: border-box;
   padding: .6rem;
   border: 1px solid var(--border);
   border-radius: 6px;
   background: var(--card);
   color: var(--text);
   font-size: .9rem;
-  resize: vertical;
+  resize: none;
+  overflow-y: hidden;
+  min-height: 2.4rem;
 }
 textarea:focus { outline: none; border-color: var(--accent); }
 
@@ -158,25 +234,32 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: .8rem 0;
+  margin: 20px 0;
+  height: var(--topbar-h);
   padding-inline: 2vw;
 }
 .topbar .right {
   display: flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: 1.2rem;
+}
+.topbar a#adminLink {
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: var(--text);
 }
 
 #progressBar {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
+  margin-top: 0;
   width: 100%;
   z-index: 10;
   height: 20px;
   background: var(--border);
   border-radius: 10px;
   overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,.08);
 }
 #progressFill {
   height: 100%;
@@ -197,7 +280,7 @@ button:hover { transform: translateY(-2px); opacity: .95; }
 #progressNote {
   font-size: .75rem;
   text-align: center;
-  margin-top: 4px;
+  margin-top: .4rem;
   color: var(--text);
 }
 

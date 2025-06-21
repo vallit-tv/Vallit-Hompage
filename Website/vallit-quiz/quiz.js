@@ -16,7 +16,6 @@ const TEXT = {
       "How exciting would a video be where someone types text using only their thoughts?",
       "Would you click a video that shows how new anti-cheat systems ban cheaters before their first shot?"
     ],
-    tiebreak: "If you could watch only one of these videos right now, which one would you pick?",
     submit: "Submit answers",
     thanks: "Thanks! We'll let you know when the winner is online.",
     extra: {
@@ -54,7 +53,6 @@ const TEXT = {
       "Wie spannend wäre ein Video, in dem jemand nur mit Gedanken Text schreibt?",
       "Würdest du ein Video anklicken, das zeigt, wie neue Anti-Cheats Cheater vor dem ersten Schuss bannen?"
     ],
-    tiebreak: "Wenn du nur eines dieser Videos sofort schauen könntest – welches wählst du?",
     submit: "Antworten absenden",
     thanks: "🎉 Danke! Wir melden uns, wenn das Sieger-Thema online geht.",
     extra: {
@@ -80,14 +78,23 @@ const TEXT = {
 // ---------------------------
 
 const form    = document.getElementById("quizForm");
-const langSel = document.getElementById("langSelect");
+const langToggle = document.getElementById("langToggle");
 const submit  = document.getElementById("submitBtn");
 const thanks  = document.getElementById("thanks");
 const progressFill = document.getElementById("progressFill");
 let currentLang = "en";
 
 renderForm(currentLang);
-langSel.onchange = e => { currentLang = e.target.value; renderForm(currentLang); };
+langToggle.style.setProperty('--seg-x','0%');
+langToggle.addEventListener('click', e => {
+  const btn = e.target.closest('button');
+  if(!btn) return;
+  currentLang = btn.dataset.lang;
+  const btns = [...langToggle.querySelectorAll('button')];
+  btns.forEach(b=>b.classList.toggle('active', b===btn));
+  langToggle.style.setProperty('--seg-x', btns.indexOf(btn)?'100%':'0%');
+  renderForm(currentLang);
+});
 
 submit.onclick = e => {
   e.preventDefault();
@@ -106,6 +113,8 @@ submit.onclick = e => {
   // UI feedback
   form.hidden = true;
   submit.hidden = true;
+  document.getElementById("pageTitle").hidden = true;
+  document.getElementById("intro").hidden = true;
   thanks.hidden = false;
   console.log("Saved Vallit response:", formData);
 };
@@ -122,9 +131,8 @@ function renderForm(lang) {
   const extra  = t.extra;
   const extra2 = t.extra2;
   const TOTAL_FIELDS = t.concepts.length
-                     + (extra ? 3 : 0)
-                     + (extra2 ? 4 : 0)
-                     + 1; // ratings + selects + tie‑breaker
+                     + (extra ? 4 : 0)
+                     + (extra2 ? 4 : 0);
   updateProgress();
 
   /* --- concept cards --- */
@@ -141,12 +149,18 @@ function renderForm(lang) {
     const row = document.createElement("div");
     row.className = "ratingRow";
     t.likertScale.forEach(val => {
+      const opt = document.createElement("label");
+      opt.className = "ratingOption";
+      const num = document.createElement("span");
+      num.className = "ratingNum";
+      num.textContent = val;
       const radio = document.createElement("input");
       radio.type = "radio";
       radio.name = `c${i}`;
       radio.value = val;
       radio.required = true;
-      row.appendChild(radio);
+      opt.append(num, radio);
+      row.appendChild(opt);
       radio.addEventListener("change", updateProgress);
     });
     card.appendChild(row);
@@ -180,12 +194,17 @@ function renderForm(lang) {
         ? 'Welches Technik-Thema findest du noch viel zu wenig erklärt?'
         : 'Which tech topic do you feel is still rarely explained?';
     wrap.appendChild(p);
-    const ta = document.createElement('textarea');
-    ta.name = 'ideaSuggestion';
-    ta.maxLength = 50;
-    ta.placeholder = lang === 'de' ? 'z. B. Datenschutz bei Smart-Homes' : 'e.g. Smart-home privacy';
-    wrap.appendChild(ta);
-    form.appendChild(wrap);
+      const ta = document.createElement('textarea');
+      ta.name = 'ideaSuggestion';
+      ta.maxLength = 50;
+      ta.rows = 1;
+      ta.placeholder = lang === 'de' ? 'z. B. Datenschutz bei Smart-Homes' : 'e.g. Smart-home privacy';
+      ta.addEventListener('input', () => {
+        autoResize(ta);
+        updateProgress();
+      });
+      wrap.appendChild(ta);
+      form.appendChild(wrap);
   }
 
   if (extra2) {
@@ -203,6 +222,8 @@ function renderForm(lang) {
     p.textContent = question;
     wrapper.appendChild(p);
 
+    const wrapSel = document.createElement('div');
+    wrapSel.className = 'selectWrap';
     const sel = document.createElement('select');
     const def = document.createElement('option');
     def.value = "";
@@ -219,22 +240,11 @@ function renderForm(lang) {
       sel.appendChild(o);
     });
     sel.addEventListener("change", updateProgress);
-    wrapper.appendChild(sel);
+    wrapSel.appendChild(sel);
+    wrapper.appendChild(wrapSel);
     form.appendChild(wrapper);
   }
 
-  // Tie-breaker
-  const tie = document.createElement("fieldset");
-  const leg = document.createElement("legend"); leg.textContent = t.tiebreak; tie.appendChild(leg);
-  order.forEach(i=>{
-    const r = document.createElement("div"); r.className="row";
-    const radio = document.createElement("input");
-    radio.type="radio"; radio.name="favorite"; radio.value=`c${i}`; radio.required=true;
-    radio.addEventListener("change", updateProgress);
-    const label = document.createElement("span"); label.textContent = t.concepts[i].slice(0,60)+"…";
-    r.append(radio,label); tie.appendChild(r);
-  });
-  form.appendChild(tie);
 
   submit.textContent = t.submit;
   submit.disabled = true;
@@ -248,6 +258,7 @@ function renderForm(lang) {
     answeredCount = [...form.elements].filter(el=>{
       if(el.type==="radio") return el.checked;
       if(el.tagName==="SELECT") return el.value;
+      if(el.tagName==="TEXTAREA") return el.value.replace(/\s+/g, '').length >= 5;
       return false;
     }).length;
     const pct = Math.min(100, Math.round((answeredCount / TOTAL_FIELDS) * 100));
@@ -262,19 +273,27 @@ function renderForm(lang) {
 }
 
 // ---- night‑mode toggle ----
-const darkSwitch = document.getElementById("darkSwitch");
-function initDark(){
-  if(darkSwitch.checked){
-    document.body.classList.add("dark");
-    localStorage.setItem("vallitDark","1");
-  }else{
-    document.body.classList.remove("dark");
-    localStorage.setItem("vallitDark","0");
-  }
+const darkToggle = document.getElementById("darkToggle");
+function syncDark(){
+  const on = document.body.classList.contains("dark");
+  localStorage.setItem("vallitDark", on ? "1" : "0");
+  const btnLight = darkToggle.querySelector('[data-mode="light"]');
+  const btnDark  = darkToggle.querySelector('[data-mode="dark"]');
+  btnLight.classList.toggle('active', !on);
+  btnDark.classList.toggle('active', on);
+  darkToggle.style.setProperty('--seg-x', on ? '100%' : '0%');
 }
-darkSwitch.checked = localStorage.getItem("vallitDark")==="1";
-initDark();
-darkSwitch.addEventListener("change", initDark);
+if(localStorage.getItem("vallitDark") === "1")
+  document.body.classList.add("dark");
+syncDark();
+darkToggle.addEventListener("click", e => {
+  const btn = e.target.closest('button');
+  if(!btn) return;
+  const mode = btn.dataset.mode;
+  if(mode === 'dark') document.body.classList.add('dark');
+  else document.body.classList.remove('dark');
+  syncDark();
+});
 
 // scroll animations for cards
 function setupScrollAnims(){
@@ -288,6 +307,11 @@ function setupScrollAnims(){
     });
   }, {threshold:0.1});
   cards.forEach(c=>obs.observe(c));
+}
+
+function autoResize(el){
+  el.style.height = 'auto';
+  el.style.height = el.scrollHeight + 'px';
 }
 
 // Fisher–Yates shuffle
