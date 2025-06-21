@@ -18,6 +18,8 @@ goBtn.addEventListener("click", () => {
   if (pwIn.value === PASS) {
     gate.remove();
     mainEl.hidden = false;
+    modal.hidden = true;
+    detailBox.textContent = "";
     render();
   } else {
     alert("Falsches Passwort");
