@@ -123,12 +123,14 @@ legend      { font-weight: 600; margin-bottom: .6rem; }
 
 /* segmented toggle buttons */
 .segmented {
+  position: relative;
   display: flex;
   border: 1px solid var(--border);
   border-radius: 20px;
   overflow: hidden;
   background: var(--card);
 }
+
 .segmented button {
   flex: 1;
   padding: .3rem .6rem;
@@ -140,11 +142,24 @@ legend      { font-weight: 600; margin-bottom: .6rem; }
   align-items: center;
   justify-content: center;
   gap: .2rem;
-  transition: background .2s, color .2s;
+  transition: color .2s;
+  z-index: 1;
+}
+
+.segmented::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+  transition: transform .25s;
+  transform: translateX(var(--seg-x,0));
 }
 
 .segmented button.active {
-  background: var(--accent);
   color: #fff;
 }
 .segmented button:not(.active):hover {
@@ -216,7 +231,7 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
+  margin: 20px 0;
   height: var(--topbar-h);
   padding-inline: 2vw;
 }
@@ -234,7 +249,7 @@ button:hover { transform: translateY(-2px); opacity: .95; }
 #progressBar {
   position: sticky;
   top: 0;
-  margin-top: 20px;
+  margin-top: 0;
   width: 100%;
   z-index: 10;
   height: 20px;

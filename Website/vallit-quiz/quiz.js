@@ -85,11 +85,14 @@ const progressFill = document.getElementById("progressFill");
 let currentLang = "en";
 
 renderForm(currentLang);
+langToggle.style.setProperty('--seg-x','0%');
 langToggle.addEventListener('click', e => {
   const btn = e.target.closest('button');
   if(!btn) return;
   currentLang = btn.dataset.lang;
-  [...langToggle.querySelectorAll('button')].forEach(b=>b.classList.toggle('active', b===btn));
+  const btns = [...langToggle.querySelectorAll('button')];
+  btns.forEach(b=>b.classList.toggle('active', b===btn));
+  langToggle.style.setProperty('--seg-x', btns.indexOf(btn)?'100%':'0%');
   renderForm(currentLang);
 });
 
@@ -268,8 +271,11 @@ const darkToggle = document.getElementById("darkToggle");
 function syncDark(){
   const on = document.body.classList.contains("dark");
   localStorage.setItem("vallitDark", on ? "1" : "0");
-  darkToggle.querySelector('[data-mode="light"]').classList.toggle('active', !on);
-  darkToggle.querySelector('[data-mode="dark"]').classList.toggle('active', on);
+  const btnLight = darkToggle.querySelector('[data-mode="light"]');
+  const btnDark  = darkToggle.querySelector('[data-mode="dark"]');
+  btnLight.classList.toggle('active', !on);
+  btnDark.classList.toggle('active', on);
+  darkToggle.style.setProperty('--seg-x', on ? '100%' : '0%');
 }
 if(localStorage.getItem("vallitDark") === "1")
   document.body.classList.add("dark");
