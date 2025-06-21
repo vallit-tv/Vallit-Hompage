@@ -26,10 +26,10 @@
   <header class="topbar">
     <nav class="mainnav">
       <a href="index.html" class="nav-logo">Vallit</a>
-      <a href="videos.html">Videos</a>
-      <a href="team.html">Team</a>
-      <a href="articles.html">Artikel</a>
-      <a href="quiz.html">Voting</a>
+      <a href="videos.html" data-i18n="navVideos">Videos</a>
+      <a href="team.html" data-i18n="navTeam">Team</a>
+      <a href="articles.html" data-i18n="navArticles">Artikel</a>
+      <a href="quiz.html" data-i18n="navQuiz">Voting</a>
     </nav>
     <div class="right">
       <div id="langToggle" class="segmented">
@@ -53,13 +53,13 @@
   </header>
 
   <div id="loginBox">
-    <h1>Mitarbeiter-Zugang</h1>
-    <p>Bitte Passwort eingeben</p>
-    <input type="password" id="pw" placeholder="Passwort" />
-    <button id="go">Einloggen</button>
+    <h1 data-i18n="loginHeading">Mitarbeiter-Zugang</h1>
+    <p data-i18n="loginPrompt">Bitte Passwort eingeben</p>
+    <input type="password" id="pw" data-i18n-placeholder="pwPlaceholder" placeholder="Passwort" />
+    <button id="go" data-i18n="loginButton">Einloggen</button>
   </div>
   <main hidden>
-    <h1>Umfrage‑Ergebnisse (lokal)</h1>
+    <h1 data-i18n="resultsTitle">Umfrage‑Ergebnisse (lokal)</h1>
 
     <table id="resultsTable">
       <thead>
@@ -79,7 +79,7 @@
   </main>
 
   <footer class="site-footer">
-    <a href="impressum.html">Impressum</a>
+    <a href="impressum.html" data-i18n="impressumLink">Impressum</a>
   </footer>
 
   <script src="admin.js"></script>
