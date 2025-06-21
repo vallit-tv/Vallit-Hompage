@@ -131,7 +131,7 @@ function renderForm(lang) {
   const extra  = t.extra;
   const extra2 = t.extra2;
   const TOTAL_FIELDS = t.concepts.length
-                     + (extra ? 3 : 0)
+                     + (extra ? 4 : 0)
                      + (extra2 ? 4 : 0);
   updateProgress();
 
@@ -198,6 +198,7 @@ function renderForm(lang) {
     ta.name = 'ideaSuggestion';
     ta.maxLength = 50;
     ta.placeholder = lang === 'de' ? 'z. B. Datenschutz bei Smart-Homes' : 'e.g. Smart-home privacy';
+    ta.addEventListener('input', updateProgress);
     wrap.appendChild(ta);
     form.appendChild(wrap);
   }
@@ -253,6 +254,7 @@ function renderForm(lang) {
     answeredCount = [...form.elements].filter(el=>{
       if(el.type==="radio") return el.checked;
       if(el.tagName==="SELECT") return el.value;
+      if(el.tagName==="TEXTAREA") return el.value.trim().split(/\s+/).filter(Boolean).length >= 5;
       return false;
     }).length;
     const pct = Math.min(100, Math.round((answeredCount / TOTAL_FIELDS) * 100));
