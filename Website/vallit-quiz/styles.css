@@ -124,9 +124,32 @@ legend      { font-weight: 600; margin-bottom: .6rem; }
 }
 .icon-btn:hover { opacity: .8; transform: translateY(-2px); }
 .icon-btn svg { width: 22px; height: 22px; stroke: currentColor; fill: none; }
-#darkToggle .moon { display: none; }
-body.dark #darkToggle .sun { display: none; }
-body.dark #darkToggle .moon { display: block; }
+
+/* segmented toggle buttons */
+.segmented {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.segmented button {
+  flex: 1;
+  padding: .3rem .6rem;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .2rem;
+  transition: background .2s, color .2s;
+}
+.segmented button.active {
+  background: var(--accent);
+  color: #fff;
+}
+.segmented svg { width: 20px; height: 20px; stroke: currentColor; fill: none; }
 
 select {
   padding: .3rem .6rem;
@@ -184,9 +207,9 @@ button:hover { transform: translateY(-2px); opacity: .95; }
 }
 
 #progressBar {
-  position: fixed;
-  top: calc(var(--topbar-h) + 10px);
-  left: 0;
+  position: sticky;
+  top: 0;
+  margin-top: 10px;
   width: 100%;
   z-index: 10;
   height: 20px;
@@ -214,7 +237,7 @@ button:hover { transform: translateY(-2px); opacity: .95; }
 #progressNote {
   font-size: .75rem;
   text-align: center;
-  margin-top: calc(var(--topbar-h) + 36px);
+  margin-top: .4rem;
   color: var(--text);
 }
 

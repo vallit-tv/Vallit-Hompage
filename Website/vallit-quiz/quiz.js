@@ -78,14 +78,20 @@ const TEXT = {
 // ---------------------------
 
 const form    = document.getElementById("quizForm");
-const langSel = document.getElementById("langSelect");
+const langToggle = document.getElementById("langToggle");
 const submit  = document.getElementById("submitBtn");
 const thanks  = document.getElementById("thanks");
 const progressFill = document.getElementById("progressFill");
 let currentLang = "en";
 
 renderForm(currentLang);
-langSel.onchange = e => { currentLang = e.target.value; renderForm(currentLang); };
+langToggle.addEventListener('click', e => {
+  const btn = e.target.closest('button');
+  if(!btn) return;
+  currentLang = btn.dataset.lang;
+  [...langToggle.querySelectorAll('button')].forEach(b=>b.classList.toggle('active', b===btn));
+  renderForm(currentLang);
+});
 
 submit.onclick = e => {
   e.preventDefault();
@@ -253,12 +259,18 @@ const darkToggle = document.getElementById("darkToggle");
 function syncDark(){
   const on = document.body.classList.contains("dark");
   localStorage.setItem("vallitDark", on ? "1" : "0");
+  darkToggle.querySelector('[data-mode="light"]').classList.toggle('active', !on);
+  darkToggle.querySelector('[data-mode="dark"]').classList.toggle('active', on);
 }
 if(localStorage.getItem("vallitDark") === "1")
   document.body.classList.add("dark");
 syncDark();
-darkToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
+darkToggle.addEventListener("click", e => {
+  const btn = e.target.closest('button');
+  if(!btn) return;
+  const mode = btn.dataset.mode;
+  if(mode === 'dark') document.body.classList.add('dark');
+  else document.body.classList.remove('dark');
   syncDark();
 });
 
