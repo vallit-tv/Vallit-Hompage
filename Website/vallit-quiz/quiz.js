@@ -82,19 +82,18 @@ const langToggle = document.getElementById("langToggle");
 const submit  = document.getElementById("submitBtn");
 const thanks  = document.getElementById("thanks");
 const progressFill = document.getElementById("progressFill");
-let currentLang = "en";
+let currentLang = document.documentElement.lang || "en";
 
 renderForm(currentLang);
-langToggle.style.setProperty('--seg-x','0%');
-langToggle.addEventListener('click', e => {
-  const btn = e.target.closest('button');
-  if(!btn) return;
-  currentLang = btn.dataset.lang;
-  const btns = [...langToggle.querySelectorAll('button')];
-  btns.forEach(b=>b.classList.toggle('active', b===btn));
-  langToggle.style.setProperty('--seg-x', btns.indexOf(btn)?'100%':'0%');
-  renderForm(currentLang);
-});
+if (langToggle) {
+  langToggle.addEventListener("click", (e) => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+    currentLang = btn.dataset.lang;
+    setLang(currentLang);
+    renderForm(currentLang);
+  });
+}
 
 submit.onclick = e => {
   e.preventDefault();
