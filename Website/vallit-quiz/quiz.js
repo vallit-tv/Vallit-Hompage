@@ -146,12 +146,18 @@ function renderForm(lang) {
     const row = document.createElement("div");
     row.className = "ratingRow";
     t.likertScale.forEach(val => {
+      const opt = document.createElement("label");
+      opt.className = "ratingOption";
+      const num = document.createElement("span");
+      num.className = "ratingNum";
+      num.textContent = val;
       const radio = document.createElement("input");
       radio.type = "radio";
       radio.name = `c${i}`;
       radio.value = val;
       radio.required = true;
-      row.appendChild(radio);
+      opt.append(num, radio);
+      row.appendChild(opt);
       radio.addEventListener("change", updateProgress);
     });
     card.appendChild(row);
@@ -208,6 +214,8 @@ function renderForm(lang) {
     p.textContent = question;
     wrapper.appendChild(p);
 
+    const wrapSel = document.createElement('div');
+    wrapSel.className = 'selectWrap';
     const sel = document.createElement('select');
     const def = document.createElement('option');
     def.value = "";
@@ -224,7 +232,8 @@ function renderForm(lang) {
       sel.appendChild(o);
     });
     sel.addEventListener("change", updateProgress);
-    wrapper.appendChild(sel);
+    wrapSel.appendChild(sel);
+    wrapper.appendChild(wrapSel);
     form.appendChild(wrapper);
   }
 
