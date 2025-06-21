@@ -194,13 +194,17 @@ function renderForm(lang) {
         ? 'Welches Technik-Thema findest du noch viel zu wenig erklärt?'
         : 'Which tech topic do you feel is still rarely explained?';
     wrap.appendChild(p);
-    const ta = document.createElement('textarea');
-    ta.name = 'ideaSuggestion';
-    ta.maxLength = 50;
-    ta.placeholder = lang === 'de' ? 'z. B. Datenschutz bei Smart-Homes' : 'e.g. Smart-home privacy';
-    ta.addEventListener('input', updateProgress);
-    wrap.appendChild(ta);
-    form.appendChild(wrap);
+      const ta = document.createElement('textarea');
+      ta.name = 'ideaSuggestion';
+      ta.maxLength = 50;
+      ta.rows = 1;
+      ta.placeholder = lang === 'de' ? 'z. B. Datenschutz bei Smart-Homes' : 'e.g. Smart-home privacy';
+      ta.addEventListener('input', () => {
+        autoResize(ta);
+        updateProgress();
+      });
+      wrap.appendChild(ta);
+      form.appendChild(wrap);
   }
 
   if (extra2) {
@@ -254,7 +258,7 @@ function renderForm(lang) {
     answeredCount = [...form.elements].filter(el=>{
       if(el.type==="radio") return el.checked;
       if(el.tagName==="SELECT") return el.value;
-      if(el.tagName==="TEXTAREA") return el.value.trim().split(/\s+/).filter(Boolean).length >= 5;
+      if(el.tagName==="TEXTAREA") return el.value.replace(/\s+/g, '').length >= 5;
       return false;
     }).length;
     const pct = Math.min(100, Math.round((answeredCount / TOTAL_FIELDS) * 100));
@@ -303,6 +307,11 @@ function setupScrollAnims(){
     });
   }, {threshold:0.1});
   cards.forEach(c=>obs.observe(c));
+}
+
+function autoResize(el){
+  el.style.height = 'auto';
+  el.style.height = el.scrollHeight + 'px';
 }
 
 // Fisher–Yates shuffle

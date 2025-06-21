@@ -204,13 +204,16 @@ select:focus { outline: none; border-color: var(--accent); }
 
 textarea {
   width: 100%;
+  box-sizing: border-box;
   padding: .6rem;
   border: 1px solid var(--border);
   border-radius: 6px;
   background: var(--card);
   color: var(--text);
   font-size: .9rem;
-  resize: vertical;
+  resize: none;
+  overflow-y: hidden;
+  min-height: 2.4rem;
 }
 textarea:focus { outline: none; border-color: var(--accent); }
 
