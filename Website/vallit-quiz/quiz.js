@@ -78,23 +78,24 @@ const TEXT = {
 // ---------------------------
 
 const form    = document.getElementById("quizForm");
-const langToggle = document.getElementById("langToggle");
+const quizLangToggle = document.getElementById("langToggle");
 const submit  = document.getElementById("submitBtn");
 const thanks  = document.getElementById("thanks");
 const progressFill = document.getElementById("progressFill");
-let currentLang = "en";
+let currentLang = localStorage.getItem("vallitLang") ||
+                  document.documentElement.lang || "en";
+document.documentElement.lang = currentLang;
 
 renderForm(currentLang);
-langToggle.style.setProperty('--seg-x','0%');
-langToggle.addEventListener('click', e => {
-  const btn = e.target.closest('button');
-  if(!btn) return;
-  currentLang = btn.dataset.lang;
-  const btns = [...langToggle.querySelectorAll('button')];
-  btns.forEach(b=>b.classList.toggle('active', b===btn));
-  langToggle.style.setProperty('--seg-x', btns.indexOf(btn)?'100%':'0%');
-  renderForm(currentLang);
-});
+if (quizLangToggle) {
+  quizLangToggle.addEventListener("click", (e) => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+    currentLang = btn.dataset.lang;
+    setLang(currentLang);
+    renderForm(currentLang);
+  });
+}
 
 submit.onclick = e => {
   e.preventDefault();
@@ -272,28 +273,7 @@ function renderForm(lang) {
   }
 }
 
-// ---- night‑mode toggle ----
-const darkToggle = document.getElementById("darkToggle");
-function syncDark(){
-  const on = document.body.classList.contains("dark");
-  localStorage.setItem("vallitDark", on ? "1" : "0");
-  const btnLight = darkToggle.querySelector('[data-mode="light"]');
-  const btnDark  = darkToggle.querySelector('[data-mode="dark"]');
-  btnLight.classList.toggle('active', !on);
-  btnDark.classList.toggle('active', on);
-  darkToggle.style.setProperty('--seg-x', on ? '100%' : '0%');
-}
-if(localStorage.getItem("vallitDark") === "1")
-  document.body.classList.add("dark");
-syncDark();
-darkToggle.addEventListener("click", e => {
-  const btn = e.target.closest('button');
-  if(!btn) return;
-  const mode = btn.dataset.mode;
-  if(mode === 'dark') document.body.classList.add('dark');
-  else document.body.classList.remove('dark');
-  syncDark();
-});
+// ---- night‑mode toggle handled in site.js ----
 
 // scroll animations for cards
 function setupScrollAnims(){

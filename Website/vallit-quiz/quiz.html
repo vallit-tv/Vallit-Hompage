@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Vallit – Home</title>
+  <title>Vallit – Themen‑Voting</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -16,8 +16,8 @@
     </nav>
     <div class="right">
       <div id="langToggle" class="segmented">
-        <button data-lang="en">EN</button>
-        <button data-lang="de" class="active">DE</button>
+        <button data-lang="en" class="active">EN</button>
+        <button data-lang="de">DE</button>
       </div>
       <div id="darkToggle" class="segmented" aria-label="Night mode">
         <button data-mode="light" class="sun active">
@@ -32,7 +32,7 @@
           </svg>
         </button>
       </div>
-      <a href="admin.html" id="adminLink" class="icon-btn" title="Mitarbeiter Zugang" target="_blank" aria-label="Mitarbeiter Zugang">
+      <a href="admin.html" id="adminLink" class="icon-btn" title="Mitarbeiter Zugang" aria-label="Mitarbeiter Zugang" target="_blank">
         <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
           <path d="M7 11V7a5 5 0 0110 0v4"/>
@@ -41,17 +41,21 @@
     </div>
   </header>
 
-  <main class="content">
-    <section class="hero">
-      <h1 data-i18n="heroTitle">Willkommen bei Vallit</h1>
-      <p data-i18n="heroDesc">Hier findest du Infos zu unserem YouTube-Kanal und unsere neuesten Videos. Zu jedem Video gibt es einen kurzen Artikel mit Quellen.</p>
-    </section>
-    <section>
-      <h2 data-i18n="currentVideo">Aktuelles Video</h2>
-      <div class="video-wrap">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video" frameborder="0" allowfullscreen></iframe>
-      </div>
-    </section>
+  <main>
+    <div id="progressBar">
+      <div id="progressFill"><span id="progressPct">0&nbsp;%</span></div>
+    </div>
+    <div id="progressNote"></div>
+
+    <h1 id="pageTitle"></h1>
+
+    <p id="intro" class="intro"></p>
+
+    <form id="quizForm"></form>
+
+    <button id="submitBtn"></button>
+    <p id="thanks" hidden>Thanks for helping Vallit decide! 👋</p>
+
   </main>
 
   <footer class="site-footer">
@@ -59,6 +63,7 @@
     <div class="copyright">© 2025 Vallit Entertainment</div>
   </footer>
 
+  <script src="quiz.js"></script>
   <script src="site.js"></script>
 </body>
 </html>

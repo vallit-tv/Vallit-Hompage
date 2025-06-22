@@ -19,11 +19,15 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: "Poppins", system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 main {
   max-width: 800px;
   margin: 26px auto 0;
   padding: 0 2vw;
+  flex: 1;
 }
 h1 { font-size: 2rem; font-weight: 600; margin-bottom: 1.2rem; }
 
@@ -237,6 +241,9 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   margin: 20px 0;
   height: var(--topbar-h);
   padding-inline: 2vw;
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: barIn .5s forwards;
 }
 .topbar .right {
   display: flex;
@@ -289,4 +296,104 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   line-height: 1.6;
   margin-bottom: 1.4rem;
   padding-inline: 2vw;
+}
+/* --- site layout additions --- */
+.mainnav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.nav-logo {
+  font-weight: 600;
+  margin-right: 2rem;
+  text-decoration: none;
+  color: var(--text);
+}
+.mainnav a {
+  text-decoration: none;
+  color: var(--text);
+  font-size: .95rem;
+}
+.mainnav a:hover {
+  text-decoration: underline;
+}
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2vw;
+}
+.hero {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.video-wrap {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+}
+.video-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.site-footer {
+  margin-top: 3rem;
+  padding: 1rem 2vw;
+  font-size: .85rem;
+  border-top: 1px solid var(--border);
+  color: #777;
+  display: flex;
+  justify-content: center;
+  gap: .6rem;
+  align-items: center;
+}
+.site-footer .copyright {
+  margin: 0;
+}
+
+@keyframes barIn {
+  to { opacity: 1; transform: none; }
+}
+
+#loginBox {
+  max-width: 340px;
+  margin: 4rem auto;
+  padding: 2rem;
+  text-align: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.05);
+}
+#loginBox input {
+  width: 100%;
+  padding: .6rem;
+  margin-top: .6rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text);
+}
+#loginBox button { margin-top: 1rem; }
+
+/* impressum box */
+.legal-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.6rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,.05);
+  line-height: 1.6;
+}
+
+.impressum-link {
+  text-decoration: none;
+  color: #777;
+}
+.impressum-link:hover {
+  text-decoration: underline;
 }
