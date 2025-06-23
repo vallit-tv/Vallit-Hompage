@@ -366,10 +366,12 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,.05);
 }
+#loginBox .pwWrap {
+  margin-top: .6rem;
+}
 #loginBox input {
   width: 100%;
   padding: .6rem;
-  margin-top: .6rem;
   border: 1px solid var(--border);
   border-radius: 4px;
   background: var(--bg);
@@ -385,6 +387,11 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   width: 100%;
   display: block;
   text-align: center;
+}
+#loginBox .showPw {
+  font-size: .85rem;
+  cursor: pointer;
+  user-select: none;
 }
 #loginBox .error { margin-top: .8rem; }
 
@@ -475,3 +482,62 @@ button:hover { transform: translateY(-2px); opacity: .95; }
 .error{color:#d33;font-size:.85rem;}
 @keyframes modalIn { from{opacity:0;transform:translateY(-20px);} to{opacity:1;transform:none;} }
 @keyframes fadeIn {from{opacity:0}to{opacity:1}}
+
+/* ----- global settings dropdown ----- */
+.settings-menu {
+  position: absolute;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+  padding: .4rem 0;
+  z-index: 1100;
+}
+.settings-menu[hidden] { display:none; }
+.settings-menu button {
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding: .5rem 1rem;
+  font: inherit;
+  color: var(--text);
+  cursor: pointer;
+}
+.settings-menu button:hover { background: var(--bg); }
+
+.pwWrap {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+.pwWrap input[type="password"],
+.pwWrap input[type="text"] {
+  flex: 1;
+}
+.showPw {
+  font-size: .85rem;
+  user-select: none;
+  cursor: pointer;
+}
+
+/* admin table */
+#resultsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background: var(--card);
+  box-shadow: 0 4px 12px rgba(0,0,0,.05);
+}
+#resultsTable th,
+#resultsTable td {
+  padding: .6rem .8rem;
+  border-bottom: 1px solid var(--border);
+}
+#resultsTable th {
+  text-align: left;
+  background: var(--bg);
+}
+#resultsTable tbody tr:nth-child(even) {
+  background: var(--card);
+}

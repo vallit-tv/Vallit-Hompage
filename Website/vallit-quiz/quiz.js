@@ -77,10 +77,12 @@ const TEXT = {
 };
 // ---------------------------
 
-const QUIZ_HASH = '95f628534c5f2ecff6d37f934a54a846fa76952741a4928c843cc54ed0ca996e';
+const QUIZ_HASH = 'b374a2c63426b7182f58d308d1834f65dbf72c1eaedfdfb788eee8bfe10ef1c5';
 const gate   = document.getElementById('quizGate');
-const quizPw = document.getElementById('quizPw');
-const quizGo = document.getElementById('quizGo');
+const quizName = document.getElementById('quizName');
+const quizPw   = document.getElementById('quizPw');
+const showQuiz = document.getElementById('showQuizPw');
+const quizGo   = document.getElementById('quizGo');
 const quizError = document.getElementById('quizError');
 const form    = document.getElementById("quizForm");
 const quizLangToggle = document.getElementById("langToggle");
@@ -98,11 +100,13 @@ if (sessionStorage.getItem('quizUnlocked')==='1') {
   gate.hidden = false;
 }
 quizPw.addEventListener('input',()=>{quizError.hidden=true;});
+if(showQuiz) showQuiz.addEventListener('change',()=>{quizPw.type = showQuiz.checked?'text':'password';});
 quizGo.addEventListener('click', async () => {
   if (await checkPass(quizPw.value, QUIZ_HASH)) {
     gate.remove();
     document.querySelector('main').hidden = false;
     sessionStorage.setItem('quizUnlocked','1');
+    sessionStorage.setItem('quizUser', quizName.value.trim());
     quizError.hidden = true;
   } else {
     quizError.hidden = false;
@@ -131,7 +135,8 @@ submit.onclick = e => {
   // save locally so admin.html can read it
   const KEY = "vallitResponses";
   const stored = JSON.parse(localStorage.getItem(KEY) || "[]");
-  stored.push({ timestamp: Date.now(), ...formData });
+  const user = sessionStorage.getItem('quizUser') || '';
+  stored.push({ name: user, timestamp: Date.now(), ...formData });
   localStorage.setItem(KEY, JSON.stringify(stored));
 
   thanks.textContent = TEXT[currentLang].thanks;

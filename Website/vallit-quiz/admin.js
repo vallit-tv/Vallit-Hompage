@@ -14,7 +14,15 @@ const modal  = document.getElementById("detailModal");
 const detailBox = document.getElementById("detailBox");
 const closeBtn = document.getElementById("closeModal");
 const errorMsg = document.getElementById("adminError");
+const showPw = document.getElementById('showAdminPw');
 pwIn.addEventListener('input', () => { errorMsg.hidden = true; });
+if(showPw) showPw.addEventListener('change',()=>{ pwIn.type = showPw.checked?'text':'password'; });
+
+if(sessionStorage.getItem('adminOK')==='1'){
+  gate.remove();
+  mainEl.hidden = false;
+  render();
+}
 
 goBtn.addEventListener("click", async () => {
   if (await checkPass(pwIn.value, PASS_HASH)) {
@@ -23,6 +31,7 @@ goBtn.addEventListener("click", async () => {
     modal.hidden = true;
     detailBox.textContent = "";
     errorMsg.hidden = true;
+    sessionStorage.setItem('adminOK','1');
     render();
   } else {
     errorMsg.hidden = false;
@@ -53,6 +62,7 @@ function render() {
     const date = new Date(row.timestamp).toLocaleString();
     tr.innerHTML = `
       <td>${idx + 1}</td>
+      <td>${row.name || ''}</td>
       <td>${date}</td>
       <td><button class="viewBtn" data-idx="${idx}">View</button></td>
     `;
