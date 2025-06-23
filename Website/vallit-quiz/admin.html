@@ -77,7 +77,12 @@
   </header>
 
   <div id="loginBox">
-    <button id="closeLogin" class="icon-btn close-login" aria-label="Close">×</button>
+    <button id="closeLogin" class="close-btn close-login" aria-label="Close">
+      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
     <h1 data-i18n="loginEmployee">Employee Login</h1>
     <p data-i18n="loginPrompt">Bitte Passwort eingeben</p>
     <div class="pwWrap">
@@ -106,7 +111,12 @@
 
     <div id="detailModal" class="modal" hidden>
       <div class="modal-content">
-        <button id="closeModal" class="icon-btn" aria-label="Close">×</button>
+        <button id="closeModal" class="close-btn" aria-label="Close">
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
         <pre id="detailBox"></pre>
       </div>
     </div>

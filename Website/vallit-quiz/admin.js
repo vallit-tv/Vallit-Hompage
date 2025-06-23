@@ -19,7 +19,12 @@ const countEl = document.getElementById('resultCount');
 const closeLogin = document.getElementById('closeLogin');
 pwIn.addEventListener('input', () => { errorMsg.hidden = true; });
 if(showPw) showPw.addEventListener('change',()=>{ pwIn.type = showPw.checked?'text':'password'; });
-if(closeLogin) closeLogin.addEventListener('click',()=>{ location.href='index.html'; });
+if(closeLogin) closeLogin.addEventListener('click',()=>{
+  gate.classList.add('closing');
+  gate.addEventListener('animationend', () => {
+    location.href = 'index.html';
+  }, { once: true });
+});
 
 if(sessionStorage.getItem('adminOK')==='1'){
   gate.remove();

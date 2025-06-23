@@ -145,7 +145,12 @@ if (settingsBtn) {
   modal.hidden = true;
   modal.innerHTML = `
     <div class="modal-content">
-      <button id="closePw" class="icon-btn" aria-label="Close">×</button>
+      <button id="closePw" class="close-btn" aria-label="Close">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
       <h2 id="modalTitle"></h2>
       <div class="pwWrap">
         <input type="password" id="pwInput" data-i18n-placeholder="pwPlaceholder" placeholder="Passwort" />

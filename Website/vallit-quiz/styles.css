@@ -129,6 +129,22 @@ legend      { font-weight: 600; margin-bottom: .6rem; }
 .icon-btn:hover { opacity: .8; transform: translateY(-2px); }
 .icon-btn svg { width: 22px; height: 22px; stroke: currentColor; fill: none; }
 
+/* close buttons */
+.close-btn {
+  position: absolute;
+  top: .4rem;
+  right: .4rem;
+  background: none;
+  border: none;
+  padding: .4rem;
+  cursor: pointer;
+  opacity: .6;
+  color: var(--text);
+  transition: transform .2s, opacity .2s;
+}
+.close-btn svg { width: 20px; height: 20px; stroke: currentColor; fill: none; }
+.close-btn:hover { opacity: 1; transform: rotate(90deg); }
+
 /* segmented toggle buttons */
 .segmented {
   position: relative;
@@ -374,6 +390,9 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   transform: translateY(20px);
   animation: cardIn .4s forwards;
 }
+#loginBox.closing {
+  animation: modalOut .35s forwards;
+}
 #loginBox .pwWrap {
   margin-top: .6rem;
 }
@@ -381,7 +400,16 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   position: absolute;
   top: .4rem;
   right: .4rem;
+  background: none;
+  border: none;
+  padding: .4rem;
+  cursor: pointer;
+  opacity: .6;
+  color: var(--text);
+  transition: transform .2s, opacity .2s;
 }
+#loginBox .close-login svg { width:20px; height:20px; stroke:currentColor; fill:none; }
+#loginBox .close-login:hover { opacity:1; transform:rotate(90deg); }
 #loginBox input {
   width: 100%;
   padding: .6rem;
@@ -389,6 +417,7 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   border-radius: 4px;
   background: var(--bg);
   color: var(--text);
+  box-sizing: border-box;
 }
 #loginBox input:focus,
 .modal-content input[type=password]:focus {
@@ -489,6 +518,7 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   border-radius:4px;
   background:var(--bg);
   color:var(--text);
+  box-sizing:border-box;
 }
 .modal-content button {
   margin-top: 1rem;
@@ -496,15 +526,11 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   display: block;
   text-align: center;
 }
-.modal-content .icon-btn {
-  position: absolute;
-  top: .4rem;
-  right: .4rem;
-}
 .modal-content .error{margin-top:.8rem;}
 
 .error{color:#d33;font-size:.85rem;}
 @keyframes modalIn { from{opacity:0;transform:translateY(-20px);} to{opacity:1;transform:none;} }
+@keyframes modalOut { from{opacity:1;transform:none;} to{opacity:0;transform:translateY(-20px);} }
 @keyframes fadeIn {from{opacity:0}to{opacity:1}}
 
 /* ----- global settings dropdown ----- */
@@ -541,6 +567,7 @@ button:hover { transform: translateY(-2px); opacity: .95; }
 .pwWrap input[type="text"] {
   width: 100%;
   padding-right: 2.2rem;
+  box-sizing: border-box;
 }
 .showPw {
   position: absolute;
