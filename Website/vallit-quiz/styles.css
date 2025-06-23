@@ -8,6 +8,9 @@
   --accent: #0a84ff; /* calmer blue */
   --topbar-h: 56px;
 }
+html {
+  scroll-behavior: smooth;
+}
 body.dark {
   --bg: #0f1113;
   --card: #1c1e20;
@@ -366,6 +369,9 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   border: 1px solid var(--border);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,.05);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: cardIn .4s forwards;
 }
 #loginBox .pwWrap {
   margin-top: .6rem;
@@ -389,7 +395,6 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   display: block;
   text-align: center;
 }
-#loginBox .showPw { margin-left:.4rem; }
 #loginBox .error { margin-top: .8rem; }
 #loginBox .cancel-link {
   display:block;
@@ -543,8 +548,20 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   cursor: pointer;
 }
 .showPw input { display:none; }
-.showPw svg { width:18px; height:18px; stroke:var(--text); fill:none; opacity:.6; }
-.showPw input:checked + svg { opacity:1; stroke:var(--accent); }
+.showPw svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--text);
+  fill: none;
+  opacity: .6;
+  transition: transform .2s ease, opacity .2s ease, stroke .2s ease;
+}
+.showPw:hover svg { transform: scale(1.1); }
+.showPw input:checked + svg {
+  opacity: 1;
+  stroke: var(--accent);
+  transform: scale(1.1);
+}
 
 #resultCount {
   margin-top: .4rem;
@@ -558,8 +575,12 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   background: var(--bg);
   border-radius: 4px;
   cursor: pointer;
+  transition: background .2s, transform .2s;
 }
-.viewBtn:hover { background: var(--card); }
+.viewBtn:hover {
+  background: var(--card);
+  transform: translateY(-2px);
+}
 
 /* admin table */
 #resultsTable {
