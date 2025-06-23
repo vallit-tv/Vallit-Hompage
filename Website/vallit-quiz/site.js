@@ -145,6 +145,7 @@ if (settingsBtn) {
   modal.hidden = true;
   modal.innerHTML = `
     <div class="modal-content">
+      <button id="closePw" class="icon-btn" aria-label="Close">×</button>
       <h2 id="modalTitle"></h2>
       <div class="pwWrap">
         <input type="password" id="pwInput" data-i18n-placeholder="pwPlaceholder" placeholder="Passwort" />
@@ -187,11 +188,13 @@ if (settingsBtn) {
   const pwSubmit = modal.querySelector('#pwSubmit');
   const pwError = modal.querySelector('#settingsError');
   const modalTitle = modal.querySelector('#modalTitle');
+  const closePw = modal.querySelector('#closePw');
 
   pwToggle.addEventListener('change', () => {
     pwInput.type = pwToggle.checked ? 'text' : 'password';
   });
   pwInput.addEventListener('input', () => { pwError.hidden = true; });
+  if(closePw) closePw.addEventListener('click', ()=>{ modal.hidden = true; });
 
   document.getElementById('menuQuiz').addEventListener('click', () => openModal('quiz'));
   document.getElementById('menuTeam').addEventListener('click', () => openModal('team'));
@@ -217,6 +220,7 @@ if (settingsBtn) {
     modalTitle.textContent = I18N[document.documentElement.lang][type === 'quiz' ? 'quizEntry' : 'teamAccessEntry'];
     pwInput.value = '';
     pwInput.type = 'password';
+    if(pwToggle) pwToggle.checked = false;
     pwError.hidden = true;
     modal.hidden = false;
     pwInput.focus();

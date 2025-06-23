@@ -8,8 +8,12 @@ const modalTitle = document.getElementById('modalTitle');
 const pwInput = document.getElementById('pwInput');
 const pwSubmit = document.getElementById('pwSubmit');
 const pwError = document.getElementById('settingsError');
+const pwToggle = document.getElementById('togglePwModal');
+const closePw = document.getElementById('closePw');
 let target = null;
 pwInput.addEventListener('input', () => { pwError.hidden = true; });
+if(pwToggle) pwToggle.addEventListener('change',()=>{ pwInput.type = pwToggle.checked?'text':'password'; });
+if(closePw) closePw.addEventListener('click', ()=>{ modal.hidden = true; });
 
 quizBtn.addEventListener('click', () => openModal('quiz'));
 teamBtn.addEventListener('click', () => openModal('team'));
@@ -34,6 +38,8 @@ function openModal(type) {
   target = type;
   modalTitle.textContent = type === 'quiz' ? 'Voting' : 'Team';
   pwInput.value = '';
+  pwInput.type = 'password';
+  if(pwToggle) pwToggle.checked = false;
   modal.hidden = false;
   pwError.hidden = true;
   pwInput.focus();

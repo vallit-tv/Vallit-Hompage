@@ -361,6 +361,7 @@ button:hover { transform: translateY(-2px); opacity: .95; }
 }
 
 #loginBox {
+  position: relative;
   max-width: 340px;
   margin: 4rem auto;
   padding: 2rem;
@@ -375,6 +376,11 @@ button:hover { transform: translateY(-2px); opacity: .95; }
 }
 #loginBox .pwWrap {
   margin-top: .6rem;
+}
+#loginBox .close-login {
+  position: absolute;
+  top: .4rem;
+  right: .4rem;
 }
 #loginBox input {
   width: 100%;
@@ -529,22 +535,25 @@ button:hover { transform: translateY(-2px); opacity: .95; }
 .settings-menu button:hover { background: var(--bg); }
 
 .pwWrap {
-  display: flex;
-  align-items: center;
-  gap: .4rem;
+  position: relative;
 }
 .pwWrap input[type="password"],
 .pwWrap input[type="text"] {
-  flex: 1;
+  width: 100%;
+  padding-right: 2.2rem;
 }
 .showPw {
+  position: absolute;
+  top: 50%;
+  right: .6rem;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  border: 1px solid var(--border);
-  border-radius: 4px;
+  width: 1.8rem;
+  height: 1.8rem;
+  border: none;
+  background: none;
   cursor: pointer;
 }
 .showPw input { display:none; }
@@ -554,13 +563,13 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   stroke: var(--text);
   fill: none;
   opacity: .6;
-  transition: transform .2s ease, opacity .2s ease, stroke .2s ease;
+  transition: transform .3s ease, opacity .3s ease, stroke .3s ease;
 }
 .showPw:hover svg { transform: scale(1.1); }
 .showPw input:checked + svg {
   opacity: 1;
   stroke: var(--accent);
-  transform: scale(1.1);
+  transform: scale(1.1) rotate(180deg);
 }
 
 #resultCount {

@@ -16,8 +16,10 @@ const closeBtn = document.getElementById("closeModal");
 const errorMsg = document.getElementById("adminError");
 const showPw = document.getElementById('showAdminPw');
 const countEl = document.getElementById('resultCount');
+const closeLogin = document.getElementById('closeLogin');
 pwIn.addEventListener('input', () => { errorMsg.hidden = true; });
 if(showPw) showPw.addEventListener('change',()=>{ pwIn.type = showPw.checked?'text':'password'; });
+if(closeLogin) closeLogin.addEventListener('click',()=>{ location.href='index.html'; });
 
 if(sessionStorage.getItem('adminOK')==='1'){
   gate.remove();

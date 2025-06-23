@@ -45,8 +45,12 @@
 
     <div id="pwModal" class="modal" hidden>
       <div class="modal-content">
+        <button id="closePw" class="icon-btn" aria-label="Close">×</button>
         <h2 id="modalTitle"></h2>
-        <input type="password" id="pwInput" data-i18n-placeholder="pwPlaceholder" placeholder="Passwort" />
+        <div class="pwWrap">
+          <input type="password" id="pwInput" data-i18n-placeholder="pwPlaceholder" placeholder="Passwort" />
+          <label class="showPw"><input type="checkbox" id="togglePwModal"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></label>
+        </div>
         <button id="pwSubmit" data-i18n="loginButton">Einloggen</button>
         <p id="settingsError" class="error" data-i18n="wrongPw" hidden>Falsches Passwort</p>
       </div>
