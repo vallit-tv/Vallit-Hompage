@@ -2,7 +2,7 @@
 
 /* admin.js – local results viewer with password gate */
 const KEY   = "vallitResponses";
-const PASS  = "070507";
+const PASS_HASH = "7e018a9c9db6ec835a53577b03fce1e2c032c040818b01de61bc4db1bd260605"; // sha-256 of password
 
 /* elements */
 const gate   = document.getElementById("loginBox");
@@ -14,8 +14,8 @@ const modal  = document.getElementById("detailModal");
 const detailBox = document.getElementById("detailBox");
 const closeBtn = document.getElementById("closeModal");
 
-goBtn.addEventListener("click", () => {
-  if (pwIn.value === PASS) {
+goBtn.addEventListener("click", async () => {
+  if (await checkPass(pwIn.value, PASS_HASH)) {
     gate.remove();
     mainEl.hidden = false;
     modal.hidden = true;
@@ -27,6 +27,12 @@ goBtn.addEventListener("click", () => {
     pwIn.focus();
   }
 });
+
+async function checkPass(pw, hash) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
+  const hex = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  return hex === hash;
+}
 
 /* ---------- render table ---------- */
 function render() {

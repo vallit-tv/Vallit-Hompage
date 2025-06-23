@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="utf-8" />
-  <title>Vallit – Themen‑Voting</title>
+  <title>Vallit – Einstellungen</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -12,12 +12,13 @@
       <a href="index.html" class="nav-logo">Vallit</a>
       <a href="videos.html" data-i18n="navVideos">Videos</a>
       <a href="team.html" data-i18n="navTeam">Team</a>
+      <a href="quiz.html" data-i18n="navQuiz">Voting</a>
       <a href="settings.html" data-i18n="navSettings">Einstellungen</a>
     </nav>
     <div class="right">
       <div id="langToggle" class="segmented">
-        <button data-lang="en" class="active">EN</button>
-        <button data-lang="de">DE</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="de" class="active">DE</button>
       </div>
       <div id="darkToggle" class="segmented" aria-label="Night mode">
         <button data-mode="light" class="sun active">
@@ -32,33 +33,23 @@
           </svg>
         </button>
       </div>
-      </a>
     </div>
   </header>
 
-  <div id="quizGate" class="modal" hidden>
-    <div class="modal-content">
-      <h1 data-i18n="loginHeading">Mitarbeiter-Zugang</h1>
-      <input type="password" id="quizPw" data-i18n-placeholder="pwPlaceholder" placeholder="Passwort" />
-      <button id="quizGo" data-i18n="loginButton">Einloggen</button>
+  <main class="content">
+    <h1 data-i18n="settingsTitle">Einstellungen</h1>
+    <div class="settings-grid">
+      <div class="settings-card" id="quizBtn" data-i18n="quizEntry">Voting</div>
+      <div class="settings-card" id="teamBtn" data-i18n="teamAccessEntry">Team-Zugang</div>
     </div>
-  </div>
 
-  <main hidden>
-    <div id="progressBar">
-      <div id="progressFill"><span id="progressPct">0&nbsp;%</span></div>
+    <div id="pwModal" class="modal" hidden>
+      <div class="modal-content">
+        <h2 id="modalTitle"></h2>
+        <input type="password" id="pwInput" data-i18n-placeholder="pwPlaceholder" placeholder="Passwort" />
+        <button id="pwSubmit" data-i18n="loginButton">Einloggen</button>
+      </div>
     </div>
-    <div id="progressNote"></div>
-
-    <h1 id="pageTitle"></h1>
-
-    <p id="intro" class="intro"></p>
-
-    <form id="quizForm"></form>
-
-    <button id="submitBtn"></button>
-    <p id="thanks" hidden>Thanks for helping Vallit decide! 👋</p>
-
   </main>
 
   <footer class="site-footer">
@@ -66,7 +57,7 @@
     <div class="copyright">© 2025 Vallit Entertainment</div>
   </footer>
 
-  <script src="quiz.js"></script>
+  <script src="settings.js"></script>
   <script src="site.js"></script>
 </body>
 </html>

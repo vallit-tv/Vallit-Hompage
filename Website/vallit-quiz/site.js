@@ -6,7 +6,10 @@ const I18N = {
   en: {
     navVideos: "Videos",
     navTeam: "Team",
-    navQuiz: "Voting",
+    navSettings: "Settings",
+    settingsTitle: "Settings",
+    quizEntry: "Voting",
+    teamAccessEntry: "Team Access",
     heroTitle: "Welcome to Vallit",
     heroDesc:
       "Learn about our YouTube channel and browse the latest videos—each with a short article and all sources.",
@@ -25,7 +28,10 @@ const I18N = {
   de: {
     navVideos: "Videos",
     navTeam: "Team",
-    navQuiz: "Voting",
+    navSettings: "Einstellungen",
+    settingsTitle: "Einstellungen",
+    quizEntry: "Voting",
+    teamAccessEntry: "Team-Zugang",
     heroTitle: "Willkommen bei Vallit",
     heroDesc:
       "Hier findest du Infos zu unserem YouTube-Kanal und unsere neuesten Videos. Zu jedem Video gibt es einen kurzen Artikel mit Quellen.",

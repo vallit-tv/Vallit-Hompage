@@ -77,6 +77,10 @@ const TEXT = {
 };
 // ---------------------------
 
+const QUIZ_HASH = 'b374a2c63426b7182f58d308d1834f65dbf72c1eaedfdfb788eee8bfe10ef1c5';
+const gate   = document.getElementById('quizGate');
+const quizPw = document.getElementById('quizPw');
+const quizGo = document.getElementById('quizGo');
 const form    = document.getElementById("quizForm");
 const quizLangToggle = document.getElementById("langToggle");
 const submit  = document.getElementById("submitBtn");
@@ -85,6 +89,24 @@ const progressFill = document.getElementById("progressFill");
 let currentLang = localStorage.getItem("vallitLang") ||
                   document.documentElement.lang || "en";
 document.documentElement.lang = currentLang;
+
+if (sessionStorage.getItem('quizUnlocked')==='1') {
+  gate.remove();
+  document.querySelector('main').hidden = false;
+} else {
+  gate.hidden = false;
+}
+quizGo.addEventListener('click', async () => {
+  if (await checkPass(quizPw.value, QUIZ_HASH)) {
+    gate.remove();
+    document.querySelector('main').hidden = false;
+    sessionStorage.setItem('quizUnlocked','1');
+  } else {
+    alert('Falsches Passwort');
+    quizPw.value = '';
+    quizPw.focus();
+  }
+});
 
 renderForm(currentLang);
 if (quizLangToggle) {
@@ -292,6 +314,12 @@ function setupScrollAnims(){
 function autoResize(el){
   el.style.height = 'auto';
   el.style.height = el.scrollHeight + 'px';
+}
+
+async function checkPass(pw, hash) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
+  const hex = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  return hex === hash;
 }
 
 // Fisher–Yates shuffle
