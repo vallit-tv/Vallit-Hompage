@@ -88,6 +88,7 @@ const form    = document.getElementById("quizForm");
 const quizLangToggle = document.getElementById("langToggle");
 const submit  = document.getElementById("submitBtn");
 const thanks  = document.getElementById("thanks");
+const progressBar  = document.getElementById("progressBar");
 const progressFill = document.getElementById("progressFill");
 const closeGate = document.getElementById('closeGate');
 let currentLang = localStorage.getItem("vallitLang") ||
@@ -99,6 +100,7 @@ if (sessionStorage.getItem('quizUnlocked')==='1') {
   document.querySelector('main').hidden = false;
 } else {
   gate.hidden = false;
+  quizName.focus();
 }
 quizPw.addEventListener('input',()=>{quizError.hidden=true;});
 if(showQuiz) showQuiz.addEventListener('change',()=>{quizPw.type = showQuiz.checked?'text':'password';});
@@ -148,6 +150,7 @@ submit.onclick = e => {
   submit.hidden = true;
   document.getElementById("pageTitle").hidden = true;
   document.getElementById("intro").hidden = true;
+  if (progressBar) progressBar.hidden = true;
   thanks.hidden = false;
   console.log("Saved Vallit response:", formData);
 };
