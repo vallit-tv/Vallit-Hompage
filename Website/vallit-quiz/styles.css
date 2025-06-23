@@ -374,7 +374,13 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   background: var(--bg);
   color: var(--text);
 }
-#loginBox button { margin-top: 1rem; }
+#loginBox input:focus,
+.modal-content input[type=password]:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+#loginBox button { margin-top: 1rem; width:100%; }
+#loginBox .error { margin-top: .8rem; }
 
 /* impressum box */
 .legal-box {
@@ -443,5 +449,18 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   animation: modalIn .3s forwards;
   text-align: center;
 }
+.modal-content input[type=password]{
+  width:100%;
+  padding:.6rem;
+  margin-top:1rem;
+  border:1px solid var(--border);
+  border-radius:4px;
+  background:var(--bg);
+  color:var(--text);
+}
+.modal-content button{margin-top:1rem;width:100%;}
+.modal-content .error{margin-top:.8rem;}
+
+.error{color:#d33;font-size:.85rem;}
 @keyframes modalIn { from{opacity:0;transform:translateY(-20px);} to{opacity:1;transform:none;} }
 @keyframes fadeIn {from{opacity:0}to{opacity:1}}

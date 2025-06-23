@@ -19,10 +19,12 @@ const I18N = {
     teamTitle: "Our Team",
     teamDesc: "We're preparing an overview of everyone at Vallit. Check back soon!",
     impressumLink: "Legal Notice",
-    loginHeading: "Employee Access",
+    loginEmployee: "Employee Login",
+    loginFriends: "Friends Login",
     loginPrompt: "Please enter password",
     loginButton: "Log in",
     pwPlaceholder: "Password",
+    wrongPw: "Wrong password",
     resultsTitle: "Survey Results (local)",
   },
   de: {
@@ -43,10 +45,12 @@ const I18N = {
     teamDesc:
       "Diese Seite befindet sich im Aufbau. Bald stellen wir hier unser Team vor.",
     impressumLink: "Impressum",
-    loginHeading: "Mitarbeiter-Zugang",
+    loginEmployee: "Mitarbeiter-Login",
+    loginFriends: "Freunde-Login",
     loginPrompt: "Bitte Passwort eingeben",
     loginButton: "Einloggen",
     pwPlaceholder: "Passwort",
+    wrongPw: "Falsches Passwort",
     resultsTitle: "Umfrage‑Ergebnisse (lokal)",
   },
 };

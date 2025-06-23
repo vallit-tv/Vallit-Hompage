@@ -81,6 +81,7 @@ const QUIZ_HASH = 'b374a2c63426b7182f58d308d1834f65dbf72c1eaedfdfb788eee8bfe10ef
 const gate   = document.getElementById('quizGate');
 const quizPw = document.getElementById('quizPw');
 const quizGo = document.getElementById('quizGo');
+const quizError = document.getElementById('quizError');
 const form    = document.getElementById("quizForm");
 const quizLangToggle = document.getElementById("langToggle");
 const submit  = document.getElementById("submitBtn");
@@ -96,13 +97,15 @@ if (sessionStorage.getItem('quizUnlocked')==='1') {
 } else {
   gate.hidden = false;
 }
+quizPw.addEventListener('input',()=>{quizError.hidden=true;});
 quizGo.addEventListener('click', async () => {
   if (await checkPass(quizPw.value, QUIZ_HASH)) {
     gate.remove();
     document.querySelector('main').hidden = false;
     sessionStorage.setItem('quizUnlocked','1');
+    quizError.hidden = true;
   } else {
-    alert('Falsches Passwort');
+    quizError.hidden = false;
     quizPw.value = '';
     quizPw.focus();
   }

@@ -7,7 +7,9 @@ const modal = document.getElementById('pwModal');
 const modalTitle = document.getElementById('modalTitle');
 const pwInput = document.getElementById('pwInput');
 const pwSubmit = document.getElementById('pwSubmit');
+const pwError = document.getElementById('settingsError');
 let target = null;
+pwInput.addEventListener('input', () => { pwError.hidden = true; });
 
 quizBtn.addEventListener('click', () => openModal('quiz'));
 teamBtn.addEventListener('click', () => openModal('team'));
@@ -20,8 +22,9 @@ pwSubmit.addEventListener('click', async () => {
     modal.hidden = true;
     if (target === 'quiz') location.href = 'quiz.html';
     else location.href = 'admin.html';
+    pwError.hidden = true;
   } else {
-    alert('Falsches Passwort');
+    pwError.hidden = false;
     pwInput.value = '';
     pwInput.focus();
   }
@@ -32,6 +35,7 @@ function openModal(type) {
   modalTitle.textContent = type === 'quiz' ? 'Voting' : 'Team';
   pwInput.value = '';
   modal.hidden = false;
+  pwError.hidden = true;
   pwInput.focus();
 }
 

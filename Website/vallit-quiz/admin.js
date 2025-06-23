@@ -13,6 +13,8 @@ const tbody  = document.querySelector("#resultsTable tbody");
 const modal  = document.getElementById("detailModal");
 const detailBox = document.getElementById("detailBox");
 const closeBtn = document.getElementById("closeModal");
+const errorMsg = document.getElementById("adminError");
+pwIn.addEventListener('input', () => { errorMsg.hidden = true; });
 
 goBtn.addEventListener("click", async () => {
   if (await checkPass(pwIn.value, PASS_HASH)) {
@@ -20,9 +22,10 @@ goBtn.addEventListener("click", async () => {
     mainEl.hidden = false;
     modal.hidden = true;
     detailBox.textContent = "";
+    errorMsg.hidden = true;
     render();
   } else {
-    alert("Falsches Passwort");
+    errorMsg.hidden = false;
     pwIn.value = "";
     pwIn.focus();
   }
