@@ -230,6 +230,7 @@ button {
   color: #fff;
   border-radius: 6px;
   cursor: pointer;
+  text-align: center;
   transition: transform .2s ease, opacity .2s;
 }
 button:hover { transform: translateY(-2px); opacity: .95; }
@@ -379,7 +380,12 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   outline: none;
   border-color: var(--accent);
 }
-#loginBox button { margin-top: 1rem; width:100%; }
+#loginBox button {
+  margin-top: 1rem;
+  width: 100%;
+  display: block;
+  text-align: center;
+}
 #loginBox .error { margin-top: .8rem; }
 
 /* impressum box */
@@ -458,7 +464,12 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   background:var(--bg);
   color:var(--text);
 }
-.modal-content button{margin-top:1rem;width:100%;}
+.modal-content button {
+  margin-top: 1rem;
+  width: 100%;
+  display: block;
+  text-align: center;
+}
 .modal-content .error{margin-top:.8rem;}
 
 .error{color:#d33;font-size:.85rem;}
