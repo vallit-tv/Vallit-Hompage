@@ -26,6 +26,7 @@ const I18N = {
     pwPlaceholder: "Password",
     namePlaceholder: "Your name",
     wrongPw: "Wrong password",
+    cancelLogin: "Cancel",
     resultsTitle: "Survey Results (local)",
   },
   de: {
@@ -53,6 +54,7 @@ const I18N = {
     pwPlaceholder: "Passwort",
     namePlaceholder: "Name",
     wrongPw: "Falsches Passwort",
+    cancelLogin: "Abbrechen",
     resultsTitle: "Umfrage‑Ergebnisse (lokal)",
   },
 };
@@ -122,7 +124,7 @@ if (langToggle) {
 }
 
 /* ----- settings dropdown ----- */
-const QUIZ_HASH = 'b374a2c63426b7182f58d308d1834f65dbf72c1eaedfdfb788eee8bfe10ef1c5';
+const QUIZ_HASH = '95f628534c5f2ecff6d37f934a54a846fa76952741a4928c843cc54ed0ca996e';
 const TEAM_HASH = '7e018a9c9db6ec835a53577b03fce1e2c032c040818b01de61bc4db1bd260605';
 const settingsBtn = document.getElementById('settingsBtn');
 
@@ -146,7 +148,7 @@ if (settingsBtn) {
       <h2 id="modalTitle"></h2>
       <div class="pwWrap">
         <input type="password" id="pwInput" data-i18n-placeholder="pwPlaceholder" placeholder="Passwort" />
-        <label class="showPw"><input type="checkbox" id="togglePw">👁</label>
+        <label class="showPw"><input type="checkbox" id="togglePw"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></label>
       </div>
       <button id="pwSubmit" data-i18n="loginButton">Einloggen</button>
       <p id="settingsError" class="error" data-i18n="wrongPw" hidden>Falsches Passwort</p>
@@ -161,14 +163,23 @@ if (settingsBtn) {
     drop.style.right = (window.innerWidth - r.right) + 'px';
   }
 
-  settingsBtn.addEventListener('click', (e) => {
+  function showDrop(){
     posDrop();
-    drop.hidden = !drop.hidden;
+    drop.hidden = false;
+    requestAnimationFrame(()=>drop.classList.add('show'));
+  }
+  function hideDrop(){
+    drop.classList.remove('show');
+    setTimeout(()=>{ drop.hidden = true; },150);
+  }
+  settingsBtn.addEventListener('click', (e) => {
+    if(drop.hidden) showDrop();
+    else hideDrop();
     e.stopPropagation();
   });
 
   document.addEventListener('click', (e) => {
-    if (!drop.contains(e.target) && e.target !== settingsBtn) drop.hidden = true;
+    if (!drop.contains(e.target) && e.target !== settingsBtn && !drop.hidden) hideDrop();
   });
 
   const pwInput = modal.querySelector('#pwInput');

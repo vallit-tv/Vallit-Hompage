@@ -77,7 +77,7 @@ const TEXT = {
 };
 // ---------------------------
 
-const QUIZ_HASH = 'b374a2c63426b7182f58d308d1834f65dbf72c1eaedfdfb788eee8bfe10ef1c5';
+const QUIZ_HASH = '95f628534c5f2ecff6d37f934a54a846fa76952741a4928c843cc54ed0ca996e';
 const gate   = document.getElementById('quizGate');
 const quizName = document.getElementById('quizName');
 const quizPw   = document.getElementById('quizPw');
@@ -89,6 +89,7 @@ const quizLangToggle = document.getElementById("langToggle");
 const submit  = document.getElementById("submitBtn");
 const thanks  = document.getElementById("thanks");
 const progressFill = document.getElementById("progressFill");
+const closeGate = document.getElementById('closeGate');
 let currentLang = localStorage.getItem("vallitLang") ||
                   document.documentElement.lang || "en";
 document.documentElement.lang = currentLang;
@@ -101,6 +102,7 @@ if (sessionStorage.getItem('quizUnlocked')==='1') {
 }
 quizPw.addEventListener('input',()=>{quizError.hidden=true;});
 if(showQuiz) showQuiz.addEventListener('change',()=>{quizPw.type = showQuiz.checked?'text':'password';});
+if(closeGate) closeGate.addEventListener('click',()=>{ location.href='index.html'; });
 quizGo.addEventListener('click', async () => {
   if (await checkPass(quizPw.value, QUIZ_HASH)) {
     gate.remove();

@@ -81,13 +81,15 @@
     <p data-i18n="loginPrompt">Bitte Passwort eingeben</p>
     <div class="pwWrap">
       <input type="password" id="pw" data-i18n-placeholder="pwPlaceholder" placeholder="Passwort" />
-      <label class="showPw"><input type="checkbox" id="showAdminPw">👁</label>
+      <label class="showPw"><input type="checkbox" id="showAdminPw"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></label>
     </div>
     <button id="go" data-i18n="loginButton">Einloggen</button>
+    <a href="index.html" class="cancel-link" data-i18n="cancelLogin">Abbrechen</a>
     <p id="adminError" class="error" data-i18n="wrongPw" hidden>Falsches Passwort</p>
   </div>
   <main hidden>
     <h1 data-i18n="resultsTitle">Umfrage‑Ergebnisse (lokal)</h1>
+    <p id="resultCount"></p>
 
     <table id="resultsTable">
       <thead>

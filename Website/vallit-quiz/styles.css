@@ -388,12 +388,17 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   display: block;
   text-align: center;
 }
-#loginBox .showPw {
-  font-size: .85rem;
-  cursor: pointer;
-  user-select: none;
-}
+#loginBox .showPw { margin-left:.4rem; }
 #loginBox .error { margin-top: .8rem; }
+#loginBox .cancel-link {
+  display:block;
+  margin-top:.6rem;
+  text-align:center;
+  color:var(--accent);
+  text-decoration:none;
+  font-size:.85rem;
+}
+#loginBox .cancel-link:hover { text-decoration: underline; }
 
 /* impressum box */
 .legal-box {
@@ -455,6 +460,7 @@ button:hover { transform: translateY(-2px); opacity: .95; }
 .modal-content {
   background: var(--card);
   padding: 1.4rem;
+  position: relative;
   border-radius: 8px;
   width: 90%;
   max-width: 360px;
@@ -477,6 +483,11 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   display: block;
   text-align: center;
 }
+.modal-content .icon-btn {
+  position: absolute;
+  top: .4rem;
+  right: .4rem;
+}
 .modal-content .error{margin-top:.8rem;}
 
 .error{color:#d33;font-size:.85rem;}
@@ -492,7 +503,11 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   box-shadow: 0 4px 12px rgba(0,0,0,.1);
   padding: .4rem 0;
   z-index: 1100;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity .15s ease, transform .15s ease;
 }
+.settings-menu.show { opacity:1; transform:none; }
 .settings-menu[hidden] { display:none; }
 .settings-menu button {
   background: none;
@@ -516,10 +531,33 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   flex: 1;
 }
 .showPw {
-  font-size: .85rem;
-  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
   cursor: pointer;
 }
+.showPw input { display:none; }
+.showPw svg { width:18px; height:18px; stroke:var(--text); fill:none; opacity:.6; }
+.showPw input:checked + svg { opacity:1; stroke:var(--accent); }
+
+#resultCount {
+  margin-top: .4rem;
+  font-size: .9rem;
+  color: #555;
+}
+
+.viewBtn {
+  padding: .3rem .6rem;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.viewBtn:hover { background: var(--card); }
 
 /* admin table */
 #resultsTable {

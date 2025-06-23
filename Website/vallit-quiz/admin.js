@@ -15,6 +15,7 @@ const detailBox = document.getElementById("detailBox");
 const closeBtn = document.getElementById("closeModal");
 const errorMsg = document.getElementById("adminError");
 const showPw = document.getElementById('showAdminPw');
+const countEl = document.getElementById('resultCount');
 pwIn.addEventListener('input', () => { errorMsg.hidden = true; });
 if(showPw) showPw.addEventListener('change',()=>{ pwIn.type = showPw.checked?'text':'password'; });
 
@@ -50,6 +51,7 @@ async function checkPass(pw, hash) {
 function render() {
   const stored = JSON.parse(localStorage.getItem(KEY) || "[]");
   tbody.innerHTML = "";
+  if(countEl) countEl.textContent = stored.length ? `Total: ${stored.length}` : '';
 
   if (stored.length === 0) {
     tbody.innerHTML =
