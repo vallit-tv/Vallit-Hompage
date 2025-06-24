@@ -126,7 +126,8 @@ if (langToggle) {
 }
 
 /* ----- settings dropdown ----- */
-const QUIZ_HASH = '95f628534c5f2ecff6d37f934a54a846fa76952741a4928c843cc54ed0ca996e';
+// sha-256 hash of the password "Team_921"
+const QUIZ_HASH = 'b374a2c63426b7182f58d308d1834f65dbf72c1eaedfdfb788eee8bfe10ef1c5';
 const TEAM_HASH = '7e018a9c9db6ec835a53577b03fce1e2c032c040818b01de61bc4db1bd260605';
 const settingsBtn = document.getElementById('settingsBtn');
 
@@ -218,6 +219,11 @@ if (settingsBtn) {
       modal.hidden = true;
       box.classList.remove('closing');
     },{once:true});
+  });
+
+  // submit on Enter
+  modal.addEventListener('keydown', e => {
+    if(e.key === 'Enter') pwSubmit.click();
   });
 
   document.getElementById('menuQuiz').addEventListener('click', () => openModal('quiz'));
