@@ -132,8 +132,8 @@ legend      { font-weight: 600; margin-bottom: .6rem; }
 /* close buttons */
 .close-btn {
   position: absolute;
-  top: .5rem;
-  right: .5rem;
+  top: .6rem;
+  right: .6rem;
   background: none;
   border: none;
   padding: .4rem;
@@ -404,8 +404,8 @@ button:hover { transform: translateY(-2px); opacity: .95; }
 }
 #loginBox .close-login {
   position: absolute;
-  top: .6rem;
-  right: .6rem;
+  top: .75rem;
+  right: .75rem;
   background: none;
   border: none;
   padding: .4rem;
@@ -592,7 +592,7 @@ button:hover { transform: translateY(-2px); opacity: .95; }
 .showPw {
   position: absolute;
   top: 50%;
-  right: .6rem;
+  right: .75rem;
   transform: translateY(-50%);
   display: flex;
   align-items: center;
