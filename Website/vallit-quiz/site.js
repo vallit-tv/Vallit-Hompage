@@ -160,6 +160,7 @@ if (settingsBtn) {
         <label class="showPw"><input type="checkbox" id="togglePw"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></label>
       </div>
       <button id="pwSubmit" data-i18n="loginButton">Einloggen</button>
+      <p id="nameError" class="error" data-i18n="nameRequired" hidden>Bitte Name eingeben</p>
       <p id="settingsError" class="error" data-i18n="wrongPw" hidden>Falsches Passwort</p>
     </div>`;
   document.body.appendChild(modal);
@@ -195,6 +196,7 @@ if (settingsBtn) {
   const pwToggle = modal.querySelector('#togglePw');
   const pwSubmit = modal.querySelector('#pwSubmit');
   const pwError = modal.querySelector('#settingsError');
+  const nameError = modal.querySelector('#nameError');
   const modalTitle = modal.querySelector('#modalTitle');
   const closePw = modal.querySelector('#closePw');
   const nameInput = modal.querySelector('#nameInput');
@@ -208,6 +210,7 @@ if (settingsBtn) {
     }
   });
   pwInput.addEventListener('input', () => { pwError.hidden = true; });
+  nameInput.addEventListener('input', () => { nameError.hidden = true; });
   if(closePw) closePw.addEventListener('click', ()=>{
     const box = modal.querySelector('.modal-content');
     box.classList.add('closing');
@@ -222,11 +225,19 @@ if (settingsBtn) {
 
   pwSubmit.addEventListener('click', async () => {
     const target = modal.dataset.target;
+    if (target === 'quiz') {
+      const name = nameInput.value.trim();
+      if (!name) {
+        nameError.hidden = false;
+        nameInput.focus();
+        return;
+      }
+    }
     const hash = target === 'quiz' ? QUIZ_HASH : TEAM_HASH;
     if (await checkPass(pwInput.value, hash)) {
       sessionStorage.setItem(target === 'quiz' ? 'quizUnlocked' : 'adminOK', '1');
       if(target === 'quiz')
-        sessionStorage.setItem('quizUser', (nameInput.value || '').trim());
+        sessionStorage.setItem('quizUser', nameInput.value.trim());
       modal.hidden = true;
       location.href = target === 'quiz' ? 'quiz.html' : 'admin.html';
       pwError.hidden = true;
@@ -248,6 +259,7 @@ if (settingsBtn) {
       nameInput.value = '';
       nameInput.hidden = type !== 'quiz';
     }
+    nameError.hidden = true;
     pwError.hidden = true;
     modal.hidden = false;
     pwInput.focus();
