@@ -84,6 +84,7 @@ const quizPw   = document.getElementById('quizPw');
 const showQuiz = document.getElementById('showQuizPw');
 const quizGo   = document.getElementById('quizGo');
 const quizError = document.getElementById('quizError');
+const nameError = document.getElementById('nameError');
 const form    = document.getElementById("quizForm");
 const quizLangToggle = document.getElementById("langToggle");
 const submit  = document.getElementById("submitBtn");
@@ -103,6 +104,7 @@ if (sessionStorage.getItem('quizUnlocked')==='1') {
   quizName.focus();
 }
 quizPw.addEventListener('input',()=>{quizError.hidden=true;});
+quizName.addEventListener('input',()=>{nameError.hidden=true;});
 if(showQuiz) showQuiz.addEventListener('change',()=>{
   quizPw.type = showQuiz.checked?'text':'password';
   const svg = showQuiz.nextElementSibling;
@@ -119,11 +121,17 @@ if(closeGate) closeGate.addEventListener('click',()=>{
   },{once:true});
 });
 quizGo.addEventListener('click', async () => {
+  const name = quizName.value.trim();
+  if(!name){
+    nameError.hidden = false;
+    quizName.focus();
+    return;
+  }
   if (await checkPass(quizPw.value, QUIZ_HASH)) {
     gate.remove();
     document.querySelector('main').hidden = false;
     sessionStorage.setItem('quizUnlocked','1');
-    sessionStorage.setItem('quizUser', quizName.value.trim());
+    sessionStorage.setItem('quizUser', name);
     quizError.hidden = true;
   } else {
     quizError.hidden = false;
