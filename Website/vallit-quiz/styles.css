@@ -263,6 +263,8 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   margin: 20px 0;
   height: var(--topbar-h);
   padding-inline: 2vw;
+  position: relative;
+  z-index: 1101;
   opacity: 0;
   transform: translateY(-10px);
   animation: barIn .5s forwards;
@@ -408,6 +410,8 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   color: var(--text);
   transition: opacity .2s;
   z-index: 1001;
+  width: auto;
+  margin-top: 0;
 }
 #loginBox .close-login svg { width:20px; height:20px; stroke:currentColor; fill:none; }
 #loginBox .close-login:hover { opacity:1; }
@@ -430,6 +434,11 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   width: 100%;
   display: block;
   text-align: center;
+}
+#loginBox button.close-login {
+  width: auto;
+  margin-top: 0;
+  display: inline-flex;
 }
 #loginBox .error { margin-top: .8rem; }
 #loginBox .cancel-link {
@@ -588,6 +597,7 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   border: none;
   background: none;
   cursor: pointer;
+  line-height: 0;
 }
 .showPw input { display:none; }
 .showPw svg {

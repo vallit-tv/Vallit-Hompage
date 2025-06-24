@@ -152,6 +152,7 @@ if (settingsBtn) {
         </svg>
       </button>
       <h2 id="modalTitle"></h2>
+      <input type="text" id="nameInput" data-i18n-placeholder="namePlaceholder" placeholder="Name" />
       <div class="pwWrap">
         <input type="password" id="pwInput" data-i18n-placeholder="pwPlaceholder" placeholder="Passwort" />
         <label class="showPw"><input type="checkbox" id="togglePw"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></label>
@@ -194,6 +195,7 @@ if (settingsBtn) {
   const pwError = modal.querySelector('#settingsError');
   const modalTitle = modal.querySelector('#modalTitle');
   const closePw = modal.querySelector('#closePw');
+  const nameInput = modal.querySelector('#nameInput');
 
   pwToggle.addEventListener('change', () => {
     pwInput.type = pwToggle.checked ? 'text' : 'password';
@@ -221,6 +223,8 @@ if (settingsBtn) {
     const hash = target === 'quiz' ? QUIZ_HASH : TEAM_HASH;
     if (await checkPass(pwInput.value, hash)) {
       sessionStorage.setItem(target === 'quiz' ? 'quizUnlocked' : 'adminOK', '1');
+      if(target === 'quiz')
+        sessionStorage.setItem('quizUser', (nameInput.value || '').trim());
       modal.hidden = true;
       location.href = target === 'quiz' ? 'quiz.html' : 'admin.html';
       pwError.hidden = true;
@@ -238,6 +242,10 @@ if (settingsBtn) {
     pwInput.value = '';
     pwInput.type = 'password';
     if(pwToggle) pwToggle.checked = false;
+    if(nameInput){
+      nameInput.value = '';
+      nameInput.hidden = type !== 'quiz';
+    }
     pwError.hidden = true;
     modal.hidden = false;
     pwInput.focus();
