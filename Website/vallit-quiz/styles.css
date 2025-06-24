@@ -397,9 +397,9 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   margin-top: .6rem;
 }
 #loginBox .close-login {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
+  position: absolute;
+  top: .6rem;
+  right: .6rem;
   background: none;
   border: none;
   padding: .4rem;
@@ -534,8 +534,11 @@ button:hover { transform: translateY(-2px); opacity: .95; }
 @keyframes modalIn { from{opacity:0;transform:translateY(-20px);} to{opacity:1;transform:none;} }
 @keyframes modalOut { from{opacity:1;transform:none;} to{opacity:0;transform:translateY(-20px);} }
 @keyframes fadeIn {from{opacity:0}to{opacity:1}}
-@keyframes blink {0%,100%{opacity:1;}50%{opacity:0;}}
-.blink{animation:blink .3s ease;}
+@keyframes blink {
+  0%,100%{transform:scaleY(1);opacity:1;}
+  50%{transform:scaleY(0.1);opacity:0.4;}
+}
+.blink{animation:blink .25s ease;}
 
 /* ----- global settings dropdown ----- */
 .settings-menu {
@@ -575,9 +578,9 @@ button:hover { transform: translateY(-2px); opacity: .95; }
 }
 .showPw {
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: 50%;
   right: .6rem;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
