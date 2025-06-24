@@ -103,8 +103,21 @@ if (sessionStorage.getItem('quizUnlocked')==='1') {
   quizName.focus();
 }
 quizPw.addEventListener('input',()=>{quizError.hidden=true;});
-if(showQuiz) showQuiz.addEventListener('change',()=>{quizPw.type = showQuiz.checked?'text':'password';});
-if(closeGate) closeGate.addEventListener('click',()=>{ location.href='index.html'; });
+if(showQuiz) showQuiz.addEventListener('change',()=>{
+  quizPw.type = showQuiz.checked?'text':'password';
+  const svg = showQuiz.nextElementSibling;
+  if(svg){
+    svg.classList.add('blink');
+    setTimeout(()=>svg.classList.remove('blink'),300);
+  }
+});
+if(closeGate) closeGate.addEventListener('click',()=>{
+  const box = gate.querySelector('.modal-content');
+  box.classList.add('closing');
+  box.addEventListener('animationend',()=>{
+    location.href='index.html';
+  },{once:true});
+});
 quizGo.addEventListener('click', async () => {
   if (await checkPass(quizPw.value, QUIZ_HASH)) {
     gate.remove();

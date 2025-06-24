@@ -197,9 +197,21 @@ if (settingsBtn) {
 
   pwToggle.addEventListener('change', () => {
     pwInput.type = pwToggle.checked ? 'text' : 'password';
+    const svg = pwToggle.nextElementSibling;
+    if(svg){
+      svg.classList.add('blink');
+      setTimeout(()=>svg.classList.remove('blink'),300);
+    }
   });
   pwInput.addEventListener('input', () => { pwError.hidden = true; });
-  if(closePw) closePw.addEventListener('click', ()=>{ modal.hidden = true; });
+  if(closePw) closePw.addEventListener('click', ()=>{
+    const box = modal.querySelector('.modal-content');
+    box.classList.add('closing');
+    box.addEventListener('animationend',()=>{
+      modal.hidden = true;
+      box.classList.remove('closing');
+    },{once:true});
+  });
 
   document.getElementById('menuQuiz').addEventListener('click', () => openModal('quiz'));
   document.getElementById('menuTeam').addEventListener('click', () => openModal('team'));

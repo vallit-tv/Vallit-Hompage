@@ -12,8 +12,22 @@ const pwToggle = document.getElementById('togglePwModal');
 const closePw = document.getElementById('closePw');
 let target = null;
 pwInput.addEventListener('input', () => { pwError.hidden = true; });
-if(pwToggle) pwToggle.addEventListener('change',()=>{ pwInput.type = pwToggle.checked?'text':'password'; });
-if(closePw) closePw.addEventListener('click', ()=>{ modal.hidden = true; });
+if(pwToggle) pwToggle.addEventListener('change',()=>{
+  pwInput.type = pwToggle.checked?'text':'password';
+  const svg = pwToggle.nextElementSibling;
+  if(svg){
+    svg.classList.add('blink');
+    setTimeout(()=>svg.classList.remove('blink'),300);
+  }
+});
+if(closePw) closePw.addEventListener('click', ()=>{
+  const box = modal.querySelector('.modal-content');
+  box.classList.add('closing');
+  box.addEventListener('animationend',()=>{
+    modal.hidden = true;
+    box.classList.remove('closing');
+  },{once:true});
+});
 
 quizBtn.addEventListener('click', () => openModal('quiz'));
 teamBtn.addEventListener('click', () => openModal('team'));

@@ -18,7 +18,14 @@ const showPw = document.getElementById('showAdminPw');
 const countEl = document.getElementById('resultCount');
 const closeLogin = document.getElementById('closeLogin');
 pwIn.addEventListener('input', () => { errorMsg.hidden = true; });
-if(showPw) showPw.addEventListener('change',()=>{ pwIn.type = showPw.checked?'text':'password'; });
+if(showPw) showPw.addEventListener('change',()=>{
+  pwIn.type = showPw.checked?'text':'password';
+  const svg = showPw.nextElementSibling;
+  if(svg){
+    svg.classList.add('blink');
+    setTimeout(()=>svg.classList.remove('blink'),300);
+  }
+});
 if(closeLogin) closeLogin.addEventListener('click',()=>{
   gate.classList.add('closing');
   gate.addEventListener('animationend', () => {
