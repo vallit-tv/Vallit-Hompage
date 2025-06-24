@@ -55,6 +55,12 @@ goBtn.addEventListener("click", async () => {
   }
 });
 
+gate.addEventListener('keydown', e => {
+  if(e.key === 'Enter') {
+    goBtn.click();
+  }
+});
+
 async function checkPass(pw, hash) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
   const hex = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');

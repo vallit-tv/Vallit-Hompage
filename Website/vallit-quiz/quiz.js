@@ -140,6 +140,12 @@ quizGo.addEventListener('click', async () => {
   }
 });
 
+gate.addEventListener('keydown', e => {
+  if(e.key === 'Enter') {
+    quizGo.click();
+  }
+});
+
 renderForm(currentLang);
 if (quizLangToggle) {
   quizLangToggle.addEventListener("click", (e) => {

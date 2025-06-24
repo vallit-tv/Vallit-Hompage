@@ -508,7 +508,7 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 1200; /* above sticky header */
 }
 .modal[hidden] { display:none; }
 .modal-content {
@@ -597,6 +597,7 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   align-items: center;
   justify-content: center;
   width: 1.6rem;
+  height: 1.6rem;
   border: none;
   background: none;
   cursor: pointer;
