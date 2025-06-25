@@ -5,7 +5,7 @@
   --card: #ffffff;
   --text: #111;
   --border: #dcdfe2;
-  --accent: #0a84ff; /* calmer blue */
+  --accent: #00E0FF; /* calmer blue */
   --topbar-h: 56px;
 }
 html {
@@ -128,6 +128,8 @@ legend      { font-weight: 600; margin-bottom: .6rem; }
 }
 .icon-btn:hover { opacity: .8; transform: translateY(-2px); }
 .icon-btn svg { width: 22px; height: 22px; stroke: currentColor; fill: none; }
+#settingsBtn{position:fixed;bottom:1rem;right:1rem;background:var(--accent);color:#fff;border-radius:50%;width:44px;height:44px;box-shadow:0 4px 12px rgba(0,0,0,.2);z-index:1201;}
+#settingsBtn svg{stroke-width:2;width:24px;height:24px;}
 
 /* close buttons */
 .close-btn {
@@ -339,10 +341,16 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   align-items: center;
 }
 .nav-logo {
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
   margin-right: 2rem;
   text-decoration: none;
   color: var(--text);
+}
+.nav-logo-img {
+  height: 32px;
+  width: auto;
+  display: block;
 }
 .mainnav a {
   text-decoration: none;
@@ -360,7 +368,7 @@ button:hover { transform: translateY(-2px); opacity: .95; }
 .hero {
   margin-top: 2rem;
   margin-bottom: 2rem;
-  background: linear-gradient(120deg, var(--accent), #5ac8fa);
+  background: linear-gradient(120deg, var(--accent), #26f2ff);
   color: #fff;
   padding: 3rem 2rem;
   text-align: center;
@@ -582,7 +590,7 @@ button:hover { transform: translateY(-2px); opacity: .95; }
 }
 .modal-content .error{margin-top:.8rem;}
 
-.error{color:#d33;font-size:.85rem;}
+.error{color:#FF5E5E;font-size:.85rem;}
 @keyframes modalIn { from{opacity:0;transform:translateY(-20px);} to{opacity:1;transform:none;} }
 @keyframes modalOut { from{opacity:1;transform:none;} to{opacity:0;transform:translateY(-20px);} }
 @keyframes fadeIn {from{opacity:0}to{opacity:1}}
@@ -594,16 +602,33 @@ button:hover { transform: translateY(-2px); opacity: .95; }
 
 /* ----- global settings dropdown ----- */
 .settings-menu {
-  position: absolute;
+  position: fixed;
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0,0,0,.1);
-  padding: .4rem 0;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.12);
+  padding: .5rem 0;
+  min-width: 160px;
   z-index: 1100;
   opacity: 0;
   transform: translateY(-6px);
   transition: opacity .15s ease, transform .15s ease;
+}
+.settings-menu::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: 16px;
+  border: 6px solid transparent;
+  border-bottom-color: var(--border);
+}
+.settings-menu::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: 17px;
+  border: 5px solid transparent;
+  border-bottom-color: var(--card);
 }
 .settings-menu.show { opacity:1; transform:none; }
 .settings-menu[hidden] { display:none; }
@@ -612,7 +637,7 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   border: none;
   width: 100%;
   text-align: left;
-  padding: .5rem 1rem;
+  padding: .6rem 1rem;
   font: inherit;
   color: var(--text);
   cursor: pointer;
@@ -712,4 +737,65 @@ button:hover { transform: translateY(-2px); opacity: .95; }
 }
 #resultsTable tbody tr:nth-child(even) {
   background: var(--card);
+}
+
+/* ----- team principles triangle ----- */
+.team-principles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.triangle {
+  position: relative;
+  width: 220px;
+  height: 180px;
+  flex-shrink: 0;
+  --rot: 0deg;
+}
+.tri-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(var(--rot));
+  transform-origin: center;
+  transition: transform .6s ease;
+}
+.tri-svg polygon {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 520;
+  stroke-dashoffset: 520;
+  animation: drawTri 1s forwards;
+}
+.tri-btn {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 2px solid var(--accent);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: background .3s, transform .3s;
+}
+.tri-btn:hover { transform: translate(-50%, -60%); }
+.tri-btn.active { background: var(--accent); }
+.tri-q { left: 50%; top: 8px; }
+.tri-i { left: 8px; bottom: 8px; }
+.tri-t { right: 8px; bottom: 8px; }
+.tri-info {
+  max-width: 260px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .4s ease, transform .4s ease;
+}
+.info-on .tri-info { opacity: 1; transform: none; }
+
+@keyframes drawTri {
+  to { stroke-dashoffset: 0; }
 }
