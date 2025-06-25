@@ -141,10 +141,19 @@ legend      { font-weight: 600; margin-bottom: .6rem; }
   cursor: pointer;
   opacity: .6;
   color: var(--text);
+  width: auto;
+  display: inline-flex;
   transition: opacity .2s;
 }
 .close-btn svg { width: 24px; height: 24px; stroke: currentColor; fill: none; }
 .close-btn:hover { opacity: 1; }
+
+.modal-content .close-btn {
+  top: .75rem;
+  right: .75rem;
+  width: auto;
+  display: inline-flex;
+}
 
 /* segmented toggle buttons */
 .segmented {
@@ -591,9 +600,10 @@ button:hover { transform: translateY(-2px); opacity: .95; }
 }
 .showPw {
   position: absolute;
-  top: 50%;
+  top: 0;
+  bottom: 0;
   right: .75rem;
-  transform: translateY(-50%);
+  margin: auto 0;
   display: flex;
   align-items: center;
   justify-content: center;
