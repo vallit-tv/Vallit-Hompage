@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="utf-8" />
-  <title>Vallit – Videos</title>
+  <title>Vallit – Einstellungen</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -12,6 +12,8 @@
       <a href="index.html" class="nav-logo">Vallit</a>
       <a href="videos.html" data-i18n="navVideos">Videos</a>
       <a href="team.html" data-i18n="navTeam">Team</a>
+      <a href="quiz.html" data-i18n="navQuiz">Voting</a>
+      <a href="settings.html" data-i18n="navSettings">Einstellungen</a>
     </nav>
     <div class="right">
       <div id="langToggle" class="segmented">
@@ -31,22 +33,32 @@
           </svg>
         </button>
       </div>
-      <button id="settingsBtn" class="icon-btn" aria-label="Settings">
-        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 008 4.6 1.65 1.65 0 009.51 4H10a1.65 1.65 0 001.51-1V3a2 2 0 114 0v.09A1.65 1.65 0 0015 4.6a1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019.4 9c.09.3.09.62 0 .92a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/>
-        </svg>
-      </button>
     </div>
   </header>
 
   <main class="content">
-    <h1 data-i18n="videosTitle">Unsere Videos</h1>
-    <div class="video-list">
-      <div class="video-wrap">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video 1" frameborder="0" allowfullscreen></iframe>
+    <h1 data-i18n="settingsTitle">Einstellungen</h1>
+    <div class="settings-grid">
+      <div class="settings-card" id="quizBtn" data-i18n="quizEntry">Voting</div>
+      <div class="settings-card" id="teamBtn" data-i18n="teamAccessEntry">Team-Zugang</div>
+    </div>
+
+    <div id="pwModal" class="modal" hidden>
+      <div class="modal-content">
+        <button id="closePw" class="close-btn" aria-label="Close">
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+        <h2 id="modalTitle"></h2>
+        <div class="pwWrap">
+          <input type="password" id="pwInput" data-i18n-placeholder="pwPlaceholder" placeholder="Passwort" />
+          <label class="showPw"><input type="checkbox" id="togglePwModal"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></label>
+        </div>
+        <button id="pwSubmit" data-i18n="loginButton">Einloggen</button>
+        <p id="settingsError" class="error" data-i18n="wrongPw" hidden>Falsches Passwort</p>
       </div>
-      <p data-i18n="videosDesc">Die Quellen zu jedem Video stehen im Artikel und in der Videobeschreibung.</p>
     </div>
   </main>
 
@@ -55,6 +67,7 @@
     <div class="copyright">© 2025 Vallit Entertainment</div>
   </footer>
 
+  <script src="settings.js"></script>
   <script src="site.js"></script>
 </body>
 </html>

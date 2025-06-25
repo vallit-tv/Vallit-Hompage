@@ -77,14 +77,75 @@ const TEXT = {
 };
 // ---------------------------
 
+// sha-256 hash of the password "Team_921"
+const QUIZ_HASH = 'b374a2c63426b7182f58d308d1834f65dbf72c1eaedfdfb788eee8bfe10ef1c5';
+const gate   = document.getElementById('quizGate');
+const quizName = document.getElementById('quizName');
+const quizPw   = document.getElementById('quizPw');
+const showQuiz = document.getElementById('showQuizPw');
+const quizGo   = document.getElementById('quizGo');
+const quizError = document.getElementById('quizError');
+const nameError = document.getElementById('nameError');
 const form    = document.getElementById("quizForm");
 const quizLangToggle = document.getElementById("langToggle");
 const submit  = document.getElementById("submitBtn");
 const thanks  = document.getElementById("thanks");
+const progressBar  = document.getElementById("progressBar");
 const progressFill = document.getElementById("progressFill");
+const closeGate = document.getElementById('closeGate');
 let currentLang = localStorage.getItem("vallitLang") ||
                   document.documentElement.lang || "en";
 document.documentElement.lang = currentLang;
+
+if (sessionStorage.getItem('quizUnlocked')==='1') {
+  gate.remove();
+  document.querySelector('main').hidden = false;
+} else {
+  gate.hidden = false;
+  quizName.focus();
+}
+quizPw.addEventListener('input',()=>{quizError.hidden=true;});
+quizName.addEventListener('input',()=>{nameError.hidden=true;});
+if(showQuiz) showQuiz.addEventListener('change',()=>{
+  quizPw.type = showQuiz.checked?'text':'password';
+  const svg = showQuiz.nextElementSibling;
+  if(svg){
+    svg.classList.add('blink');
+    setTimeout(()=>svg.classList.remove('blink'),300);
+  }
+});
+if(closeGate) closeGate.addEventListener('click',()=>{
+  const box = gate.querySelector('.modal-content');
+  box.classList.add('closing');
+  box.addEventListener('animationend',()=>{
+    location.href='index.html';
+  },{once:true});
+});
+quizGo.addEventListener('click', async () => {
+  const name = quizName.value.trim();
+  if(!name){
+    nameError.hidden = false;
+    quizName.focus();
+    return;
+  }
+  if (await checkPass(quizPw.value, QUIZ_HASH)) {
+    gate.remove();
+    document.querySelector('main').hidden = false;
+    sessionStorage.setItem('quizUnlocked','1');
+    sessionStorage.setItem('quizUser', name);
+    quizError.hidden = true;
+  } else {
+    quizError.hidden = false;
+    quizPw.value = '';
+    quizPw.focus();
+  }
+});
+
+gate.addEventListener('keydown', e => {
+  if(e.key === 'Enter') {
+    quizGo.click();
+  }
+});
 
 renderForm(currentLang);
 if (quizLangToggle) {
@@ -106,7 +167,8 @@ submit.onclick = e => {
   // save locally so admin.html can read it
   const KEY = "vallitResponses";
   const stored = JSON.parse(localStorage.getItem(KEY) || "[]");
-  stored.push({ timestamp: Date.now(), ...formData });
+  const user = sessionStorage.getItem('quizUser') || '';
+  stored.push({ name: user, timestamp: Date.now(), ...formData });
   localStorage.setItem(KEY, JSON.stringify(stored));
 
   thanks.textContent = TEXT[currentLang].thanks;
@@ -116,6 +178,7 @@ submit.onclick = e => {
   submit.hidden = true;
   document.getElementById("pageTitle").hidden = true;
   document.getElementById("intro").hidden = true;
+  if (progressBar) progressBar.hidden = true;
   thanks.hidden = false;
   console.log("Saved Vallit response:", formData);
 };
@@ -292,6 +355,12 @@ function setupScrollAnims(){
 function autoResize(el){
   el.style.height = 'auto';
   el.style.height = el.scrollHeight + 'px';
+}
+
+async function checkPass(pw, hash) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
+  const hex = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  return hex === hash;
 }
 
 // Fisher–Yates shuffle
