@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Vallit – Themen‑Voting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <nav class="mainnav">
+      <a href="index.html" class="nav-logo">Vallit</a>
+      <a href="videos.html" data-i18n="navVideos">Videos</a>
+      <a href="team.html" data-i18n="navTeam">Team</a>
+    </nav>
+    <div class="right">
+      <div id="langToggle" class="segmented">
+        <button data-lang="en" class="active">EN</button>
+        <button data-lang="de">DE</button>
+      </div>
+      <div id="darkToggle" class="segmented" aria-label="Night mode">
+        <button data-mode="light" class="sun active">
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+        </button>
+        <button data-mode="dark" class="moon">
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+          </svg>
+        </button>
+      </div>
+      <button id="settingsBtn" class="icon-btn" aria-label="Settings">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 008 4.6 1.65 1.65 0 009.51 4H10a1.65 1.65 0 001.51-1V3a2 2 0 114 0v.09A1.65 1.65 0 0015 4.6a1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019.4 9c.09.3.09.62 0 .92a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <div id="quizGate" class="modal" hidden>
+    <div class="modal-content">
+      <button id="closeGate" class="close-btn" aria-label="Close">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+      <h1 data-i18n="loginFriends">Friends Login</h1>
+      <input type="text" id="quizName" data-i18n-placeholder="namePlaceholder" placeholder="Name" required />
+      <div class="pwWrap">
+        <input type="password" id="quizPw" data-i18n-placeholder="pwPlaceholder" placeholder="Passwort" required />
+        <label class="showPw">
+          <input type="checkbox" id="showQuizPw">
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <g class="open">
+              <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </g>
+            <g class="closed">
+              <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>
+              <line x1="4" y1="4" x2="20" y2="20"/>
+            </g>
+          </svg>
+        </label>
+      </div>
+      <button id="quizGo" data-i18n="loginButton">Einloggen</button>
+      <p id="nameError" class="error" data-i18n="nameRequired" hidden>Please enter your name</p>
+      <p id="quizError" class="error" data-i18n="wrongPw" hidden>Falsches Passwort</p>
+    </div>
+  </div>
+
+  <main hidden>
+    <div id="progressBar">
+      <div id="progressFill"><span id="progressPct">0&nbsp;%</span></div>
+    </div>
+    <div id="progressNote"></div>
+
+    <h1 id="pageTitle"></h1>
+
+    <p id="intro" class="intro"></p>
+
+    <form id="quizForm"></form>
+
+    <button id="submitBtn"></button>
+    <p id="thanks" hidden>Thanks for helping Vallit decide! 👋</p>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="impressum.html" class="impressum-link" data-i18n="impressumLink">Impressum</a>
+      <a href="privacy.html" class="privacy-link" data-i18n="privacyLink">Datenschutz</a>
+    </div>
+    <div class="copyright">© 2025 Vallit Entertainment</div>
+  </footer>
+
+  <script src="quiz.js"></script>
+  <script src="site.js"></script>
+</body>
+</html>
