@@ -1,14 +1,13 @@
 
 /* ---------- Vallit survey redesign ---------- */
 :root {
-  --bg: #F7F9FB;
+  --bg: #f8f8f8;
   --card: #ffffff;
-  --text: #1C1E20;
-  --border: #DCDFE2;
-  /* updated matte cyan accent */
-  --accent: #00A1B6;
-  --gradient-start: #2ABFD1;
-  --gradient-end: #00A1B6;
+  --text: #1c1c1c;
+  --border: #d0d0d0;
+  --accent: #444;
+  --gradient-start: #888;
+  --gradient-end: #444;
   --error: #FF5E5E;
   --topbar-h: 56px;
 }
@@ -16,10 +15,13 @@ html {
   scroll-behavior: smooth;
 }
 body.dark {
-  --bg: #1C1E20;
-  --card: #1C1E20;
-  --text: #f5f6f7;
-  --border: #333333;
+  --bg: #121212;
+  --card: #1e1e1e;
+  --text: #f2f2f2;
+  --border: #444;
+  --accent: #ccc;
+  --gradient-start: #666;
+  --gradient-end: #aaa;
 }
 body {
   margin: 0;
@@ -415,8 +417,8 @@ body.logo-small .nav-logo .logo-img { display: block; }
 .maintenance p { font-size: 1.1rem; margin-top: .8rem; }
 .triangle {
   position: relative;
-  width: 260px;
-  height: 200px;
+  width: 280px;
+  height: 220px;
   margin: 2rem auto;
   --rot: 0deg;
 }
@@ -431,29 +433,33 @@ body.logo-small .nav-logo .logo-img { display: block; }
 .tri-svg polygon {
   fill: none;
   stroke: var(--accent);
-  stroke-width: 2;
+  stroke-width: 2.5;
   stroke-dasharray: 520;
   stroke-dashoffset: 520;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.1));
   animation: drawTri 1s ease forwards;
 }
 .tri-btn {
   position: absolute;
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: var(--card);
   border: 2px solid var(--accent);
   transform: translate(-50%, -50%);
   cursor: pointer;
-  transition: background .3s, transform .3s;
+  transition: background .3s, transform .3s, border-color .3s;
 }
 .tri-btn:hover { transform: translate(-50%, -60%); }
-.tri-btn.active { background: var(--accent); }
+.tri-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+}
 .tri-q { left: 50%; top: 10px; }
 .tri-i { left: 10px; bottom: 10px; }
 .tri-t { right: 10px; bottom: 10px; }
 .tri-info {
-  margin-top: 210px;
+  margin-top: 230px;
   text-align: center;
   opacity: 0;
   transform: translateY(20px);
