@@ -18,6 +18,15 @@ const I18N = {
     videosDesc: "Sources for every video are linked in its article and description.",
     teamTitle: "Our Team",
     teamDesc: "We're preparing an overview of everyone at Vallit. Check back soon!",
+    maintHeading: "Page Under Construction",
+    maintText: "Check back soon!",
+    principlesTitle: "Our Principles",
+    principle1: "Quality",
+    principle1Desc: "We deliver top level content.",
+    principle2: "Innovation",
+    principle2Desc: "We love trying new ideas.",
+    principle3: "Transparency",
+    principle3Desc: "We communicate openly with our audience.",
     impressumLink: "Legal Notice",
     privacyLink: "Privacy Policy",
     loginEmployee: "Employee Login",
@@ -48,6 +57,15 @@ const I18N = {
     teamTitle: "Unser Team",
     teamDesc:
       "Diese Seite befindet sich im Aufbau. Bald stellen wir hier unser Team vor.",
+    maintHeading: "Seite im Aufbau",
+    maintText: "Schau bald wieder vorbei!",
+    principlesTitle: "Unsere Prinzipien",
+    principle1: "Qualität",
+    principle1Desc: "Wir liefern Inhalte auf höchstem Niveau.",
+    principle2: "Innovation",
+    principle2Desc: "Wir probieren ständig neue Ideen aus.",
+    principle3: "Transparenz",
+    principle3Desc: "Wir kommunizieren offen mit unserem Publikum.",
     impressumLink: "Impressum",
     privacyLink: "Datenschutz",
     loginEmployee: "Mitarbeiter-Login",
@@ -279,3 +297,22 @@ async function checkPass(pw, hash) {
   const hex = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
   return hex === hash;
 }
+
+/* ----- logo swap on scroll ----- */
+const navLogo = document.querySelector('.nav-logo');
+if (navLogo) {
+  const onScroll = () => {
+    if (window.scrollY > 50) document.body.classList.add('logo-small');
+    else document.body.classList.remove('logo-small');
+  };
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+}
+
+/* ----- pillar interaction ----- */
+document.querySelectorAll('.pillar').forEach(p => {
+  p.addEventListener('click', () => {
+    document.querySelectorAll('.pillar').forEach(el => el.classList.remove('active'));
+    p.classList.add('active');
+  });
+});

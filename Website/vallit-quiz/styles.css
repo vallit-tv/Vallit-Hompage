@@ -1,21 +1,24 @@
 
 /* ---------- Vallit survey redesign ---------- */
 :root {
-  --bg: #f7f9fb;
+  --bg: #F7F9FB;
   --card: #ffffff;
-  --text: #111;
-  --border: #dcdfe2;
-  --accent: #0a84ff; /* calmer blue */
+  --text: #1C1E20;
+  --border: #DCDFE2;
+  --accent: #00E0FF;
+  --gradient-start: #25D4FF;
+  --gradient-end: #00E0FF;
+  --error: #FF5E5E;
   --topbar-h: 56px;
 }
 html {
   scroll-behavior: smooth;
 }
 body.dark {
-  --bg: #0f1113;
-  --card: #1c1e20;
+  --bg: #1C1E20;
+  --card: #1C1E20;
   --text: #f5f6f7;
-  --border: #333;
+  --border: #333333;
 }
 body {
   margin: 0;
@@ -180,6 +183,7 @@ legend      { font-weight: 600; margin-bottom: .6rem; }
   justify-content: center;
   line-height: 1;
   gap: .2rem;
+  font-size: .95rem;
   transition: color .2s;
   z-index: 1;
 }
@@ -288,6 +292,7 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   display: flex;
   align-items: center;
   gap: 1.2rem;
+  font-size: 1rem;
 }
 
 #progressBar {
@@ -343,11 +348,21 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   margin-right: 2rem;
   text-decoration: none;
   color: var(--text);
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
 }
+.nav-logo .logo-img {
+  display: none;
+  height: 24px;
+  stroke: var(--accent);
+}
+body.logo-small .nav-logo .logo-text { display: none; }
+body.logo-small .nav-logo .logo-img { display: block; }
 .mainnav a {
   text-decoration: none;
   color: var(--text);
-  font-size: .95rem;
+  font-size: 1rem;
 }
 .mainnav a:hover {
   text-decoration: underline;
@@ -360,7 +375,7 @@ button:hover { transform: translateY(-2px); opacity: .95; }
 .hero {
   margin-top: 2rem;
   margin-bottom: 2rem;
-  background: linear-gradient(120deg, var(--accent), #5ac8fa);
+  background: linear-gradient(120deg, var(--gradient-start), var(--gradient-end));
   color: #fff;
   padding: 3rem 2rem;
   text-align: center;
@@ -382,6 +397,47 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   width: 100%;
   height: 100%;
 }
+.maintenance {
+  margin: 4rem auto;
+  max-width: 600px;
+  text-align: center;
+  padding: 2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.05);
+}
+.maintenance h1 {
+  margin-top: 0;
+  font-size: 2rem;
+}
+.maintenance p { font-size: 1.1rem; margin-top: .8rem; }
+.pillars {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.pillar {
+  flex: 1 1 160px;
+  max-width: 200px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: transform .3s, background .3s, color .3s;
+}
+.pillar h3 { margin-top: 0; }
+.pillar p { display: none; margin-top: .6rem; font-size: .9rem; }
+.pillar.active {
+  transform: translateY(-6px);
+  background: linear-gradient(180deg, var(--gradient-start), var(--gradient-end));
+  color: #fff;
+}
+.pillar.active p { display: block; }
 .site-footer {
   margin-top: 3rem;
   padding: 2rem 2vw;

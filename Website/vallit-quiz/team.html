@@ -9,7 +9,10 @@
 <body>
   <header class="topbar">
     <nav class="mainnav">
-      <a href="index.html" class="nav-logo">Vallit</a>
+      <a href="index.html" class="nav-logo">
+        <span class="logo-text">Vallit</span>
+        <img src="logo.svg" alt="Vallit" class="logo-img" />
+      </a>
       <a href="videos.html" data-i18n="navVideos">Videos</a>
       <a href="team.html" data-i18n="navTeam">Team</a>
     </nav>
@@ -41,8 +44,27 @@
   </header>
 
   <main class="content">
-    <h1 data-i18n="teamTitle">Unser Team</h1>
-    <p data-i18n="teamDesc">Diese Seite befindet sich im Aufbau. Bald stellen wir hier unser Team vor.</p>
+    <div class="maintenance">
+      <h1 data-i18n="maintHeading">Seite im Aufbau</h1>
+      <p data-i18n="maintText">Schau bald wieder vorbei!</p>
+    </div>
+    <section>
+      <h2 data-i18n="principlesTitle">Unsere Prinzipien</h2>
+      <div class="pillars">
+        <div class="pillar">
+          <h3 data-i18n="principle1">Qualität</h3>
+          <p data-i18n="principle1Desc">Wir liefern Inhalte auf höchstem Niveau.</p>
+        </div>
+        <div class="pillar">
+          <h3 data-i18n="principle2">Innovation</h3>
+          <p data-i18n="principle2Desc">Wir probieren ständig neue Ideen aus.</p>
+        </div>
+        <div class="pillar">
+          <h3 data-i18n="principle3">Transparenz</h3>
+          <p data-i18n="principle3Desc">Wir kommunizieren offen mit unserem Publikum.</p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
