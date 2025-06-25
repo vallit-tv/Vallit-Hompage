@@ -54,7 +54,19 @@
         <h2 id="modalTitle"></h2>
         <div class="pwWrap">
           <input type="password" id="pwInput" data-i18n-placeholder="pwPlaceholder" placeholder="Passwort" />
-          <label class="showPw"><input type="checkbox" id="togglePwModal"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></label>
+          <label class="showPw">
+            <input type="checkbox" id="togglePwModal">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <g class="open">
+                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </g>
+              <g class="closed">
+                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>
+                <line x1="4" y1="4" x2="20" y2="20"/>
+              </g>
+            </svg>
+          </label>
         </div>
         <button id="pwSubmit" data-i18n="loginButton">Einloggen</button>
         <p id="settingsError" class="error" data-i18n="wrongPw" hidden>Falsches Passwort</p>
