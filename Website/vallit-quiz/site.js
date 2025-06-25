@@ -317,11 +317,15 @@ if (navLogo) {
 /* ----- triangle interaction ----- */
 const triButtons = document.querySelectorAll('.tri-btn');
 const triInfo = document.querySelector('.tri-info');
-if(triButtons.length){
+const triWrap = document.getElementById('principleTri');
+if(triButtons.length && triWrap){
   triButtons.forEach(btn=>{
     btn.addEventListener('click',()=>{
       triButtons.forEach(b=>b.classList.remove('active'));
       btn.classList.add('active');
+      const ang = btn.dataset.angle || '0deg';
+      triWrap.style.setProperty('--rot', ang);
+      triWrap.classList.add('info-on');
       const key = btn.dataset.key;
       if(triInfo){
         triInfo.querySelector('h3').dataset.i18n = key;

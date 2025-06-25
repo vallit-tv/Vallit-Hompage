@@ -5,9 +5,10 @@
   --card: #ffffff;
   --text: #1C1E20;
   --border: #DCDFE2;
-  --accent: #00B8D9;
-  --gradient-start: #2FC6DB;
-  --gradient-end: #00B8D9;
+  /* updated matte cyan accent */
+  --accent: #00A1B6;
+  --gradient-start: #2ABFD1;
+  --gradient-end: #00A1B6;
   --error: #FF5E5E;
   --topbar-h: 56px;
 }
@@ -417,17 +418,23 @@ body.logo-small .nav-logo .logo-img { display: block; }
   width: 260px;
   height: 200px;
   margin: 2rem auto;
+  --rot: 0deg;
 }
 .tri-svg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  transform: rotate(var(--rot));
+  transition: transform .6s ease;
 }
 .tri-svg polygon {
   fill: none;
   stroke: var(--accent);
   stroke-width: 2;
+  stroke-dasharray: 520;
+  stroke-dashoffset: 520;
+  animation: drawTri 1s ease forwards;
 }
 .tri-btn {
   position: absolute;
@@ -448,9 +455,17 @@ body.logo-small .nav-logo .logo-img { display: block; }
 .tri-info {
   margin-top: 210px;
   text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .4s ease, transform .4s ease;
 }
 .tri-info h3 { margin: 0; font-size: 1.2rem; }
 .tri-info p { margin-top: .6rem; font-size: .9rem; }
+.info-on .tri-info { opacity: 1; transform: none; }
+
+@keyframes drawTri {
+  to { stroke-dashoffset: 0; }
+}
 .site-footer {
   margin-top: 3rem;
   padding: 2rem 2vw;
