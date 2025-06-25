@@ -18,6 +18,13 @@ const I18N = {
     videosDesc: "Sources for every video are linked in its article and description.",
     teamTitle: "Our Team",
     teamDesc: "We're preparing an overview of everyone at Vallit. Check back soon!",
+    principlesTitle: "Our Principles",
+    principle1: "Quality",
+    principle1Desc: "We deliver top level content.",
+    principle2: "Innovation",
+    principle2Desc: "We love trying new ideas.",
+    principle3: "Transparency",
+    principle3Desc: "We communicate openly with our audience.",
     impressumLink: "Legal Notice",
     privacyLink: "Privacy Policy",
     loginEmployee: "Employee Login",
@@ -48,6 +55,13 @@ const I18N = {
     teamTitle: "Unser Team",
     teamDesc:
       "Diese Seite befindet sich im Aufbau. Bald stellen wir hier unser Team vor.",
+    principlesTitle: "Unsere Prinzipien",
+    principle1: "Qualität",
+    principle1Desc: "Wir liefern Inhalte auf höchstem Niveau.",
+    principle2: "Innovation",
+    principle2Desc: "Wir probieren ständig neue Ideen aus.",
+    principle3: "Transparenz",
+    principle3Desc: "Wir kommunizieren offen mit unserem Publikum.",
     impressumLink: "Impressum",
     privacyLink: "Datenschutz",
     loginEmployee: "Mitarbeiter-Login",
@@ -278,4 +292,27 @@ async function checkPass(pw, hash) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
   const hex = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
   return hex === hash;
+}
+
+/* ----- triangle interaction ----- */
+const triButtons = document.querySelectorAll('.tri-btn');
+const triInfo = document.querySelector('.tri-info');
+const triWrap = document.getElementById('principleTri');
+if(triButtons.length && triWrap){
+  triButtons.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      triButtons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const ang = btn.dataset.angle || '0deg';
+      triWrap.style.setProperty('--rot', ang);
+      triWrap.classList.add('info-on');
+      const key = btn.dataset.key;
+      if(triInfo){
+        triInfo.querySelector('h3').dataset.i18n = key;
+        triInfo.querySelector('p').dataset.i18n = key + 'Desc';
+        applyTranslations(document.documentElement.lang);
+      }
+    });
+  });
+  triButtons[0].click();
 }
