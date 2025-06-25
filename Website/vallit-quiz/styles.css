@@ -21,7 +21,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: "Poppins", system-ui, sans-serif;
+  font-family: "Inter", "SF Pro Display", "Poppins", system-ui, sans-serif;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -360,6 +360,13 @@ button:hover { transform: translateY(-2px); opacity: .95; }
 .hero {
   margin-top: 2rem;
   margin-bottom: 2rem;
+  background: linear-gradient(120deg, var(--accent), #5ac8fa);
+  color: #fff;
+  padding: 3rem 2rem;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.06);
+  animation: heroFade .6s ease forwards;
 }
 .video-wrap {
   position: relative;
@@ -377,20 +384,40 @@ button:hover { transform: translateY(-2px); opacity: .95; }
 }
 .site-footer {
   margin-top: 3rem;
-  padding: 1rem 2vw;
+  padding: 2rem 2vw;
   font-size: .85rem;
   border-top: 1px solid var(--border);
-  color: #777;
+  color: var(--text);
+  background: var(--card);
   display: flex;
-  justify-content: center;
-  gap: .6rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .6rem 1.2rem;
   align-items: center;
+}
+.footer-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.site-footer a {
+  color: var(--text);
+  text-decoration: none;
+}
+.site-footer a:hover {
+  text-decoration: underline;
 }
 .site-footer .copyright {
   margin: 0;
 }
 
 @keyframes barIn {
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes heroFade {
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: none; }
 }
 

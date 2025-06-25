@@ -19,6 +19,7 @@ const I18N = {
     teamTitle: "Our Team",
     teamDesc: "We're preparing an overview of everyone at Vallit. Check back soon!",
     impressumLink: "Legal Notice",
+    privacyLink: "Privacy Policy",
     loginEmployee: "Employee Login",
     loginFriends: "Friends Login",
     loginPrompt: "Please enter password",
@@ -48,6 +49,7 @@ const I18N = {
     teamDesc:
       "Diese Seite befindet sich im Aufbau. Bald stellen wir hier unser Team vor.",
     impressumLink: "Impressum",
+    privacyLink: "Datenschutz",
     loginEmployee: "Mitarbeiter-Login",
     loginFriends: "Freunde-Login",
     loginPrompt: "Bitte Passwort eingeben",
