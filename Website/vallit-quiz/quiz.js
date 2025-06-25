@@ -79,6 +79,7 @@ const TEXT = {
 
 // sha-256 hash of the password "Team_921"
 const QUIZ_HASH = 'b374a2c63426b7182f58d308d1834f65dbf72c1eaedfdfb788eee8bfe10ef1c5';
+const TEAM_HASH = '7e018a9c9db6ec835a53577b03fce1e2c032c040818b01de61bc4db1bd260605';
 const gate   = document.getElementById('quizGate');
 const quizName = document.getElementById('quizName');
 const quizPw   = document.getElementById('quizPw');
@@ -128,7 +129,7 @@ quizGo.addEventListener('click', async () => {
     quizName.focus();
     return;
   }
-  if (await checkPass(quizPw.value, QUIZ_HASH)) {
+  if (await checkPass(quizPw.value, QUIZ_HASH) || await checkPass(quizPw.value, TEAM_HASH)) {
     gate.remove();
     document.querySelector('main').hidden = false;
     sessionStorage.setItem('quizUnlocked','1');

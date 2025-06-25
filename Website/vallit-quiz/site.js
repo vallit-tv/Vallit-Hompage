@@ -259,8 +259,13 @@ if (settingsBtn) {
         return;
       }
     }
-    const hash = target === 'quiz' ? QUIZ_HASH : TEAM_HASH;
-    if (await checkPass(pwInput.value, hash)) {
+    let ok;
+    if(target === 'quiz') {
+      ok = await checkPass(pwInput.value, QUIZ_HASH) || await checkPass(pwInput.value, TEAM_HASH);
+    } else {
+      ok = await checkPass(pwInput.value, TEAM_HASH);
+    }
+    if (ok) {
       sessionStorage.setItem(target === 'quiz' ? 'quizUnlocked' : 'adminOK', '1');
       if(target === 'quiz')
         sessionStorage.setItem('quizUser', nameInput.value.trim());
@@ -309,10 +314,21 @@ if (navLogo) {
   onScroll();
 }
 
-/* ----- pillar interaction ----- */
-document.querySelectorAll('.pillar').forEach(p => {
-  p.addEventListener('click', () => {
-    document.querySelectorAll('.pillar').forEach(el => el.classList.remove('active'));
-    p.classList.add('active');
+/* ----- triangle interaction ----- */
+const triButtons = document.querySelectorAll('.tri-btn');
+const triInfo = document.querySelector('.tri-info');
+if(triButtons.length){
+  triButtons.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      triButtons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const key = btn.dataset.key;
+      if(triInfo){
+        triInfo.querySelector('h3').dataset.i18n = key;
+        triInfo.querySelector('p').dataset.i18n = key + 'Desc';
+        applyTranslations(document.documentElement.lang);
+      }
+    });
   });
-});
+  triButtons[0].click();
+}
