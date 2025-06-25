@@ -18,7 +18,17 @@ const I18N = {
     videosDesc: "Sources for every video are linked in its article and description.",
     teamTitle: "Our Team",
     teamDesc: "We're preparing an overview of everyone at Vallit. Check back soon!",
+    maintHeading: "Page Under Construction",
+    maintText: "Check back soon!",
+    principlesTitle: "Our Principles",
+    principle1: "Quality",
+    principle1Desc: "We deliver top level content.",
+    principle2: "Innovation",
+    principle2Desc: "We love trying new ideas.",
+    principle3: "Transparency",
+    principle3Desc: "We communicate openly with our audience.",
     impressumLink: "Legal Notice",
+    privacyLink: "Privacy Policy",
     loginEmployee: "Employee Login",
     loginFriends: "Friends Login",
     loginPrompt: "Please enter password",
@@ -47,7 +57,17 @@ const I18N = {
     teamTitle: "Unser Team",
     teamDesc:
       "Diese Seite befindet sich im Aufbau. Bald stellen wir hier unser Team vor.",
+    maintHeading: "Seite im Aufbau",
+    maintText: "Schau bald wieder vorbei!",
+    principlesTitle: "Unsere Prinzipien",
+    principle1: "Qualität",
+    principle1Desc: "Wir liefern Inhalte auf höchstem Niveau.",
+    principle2: "Innovation",
+    principle2Desc: "Wir probieren ständig neue Ideen aus.",
+    principle3: "Transparenz",
+    principle3Desc: "Wir kommunizieren offen mit unserem Publikum.",
     impressumLink: "Impressum",
+    privacyLink: "Datenschutz",
     loginEmployee: "Mitarbeiter-Login",
     loginFriends: "Freunde-Login",
     loginPrompt: "Bitte Passwort eingeben",
@@ -239,8 +259,13 @@ if (settingsBtn) {
         return;
       }
     }
-    const hash = target === 'quiz' ? QUIZ_HASH : TEAM_HASH;
-    if (await checkPass(pwInput.value, hash)) {
+    let ok;
+    if(target === 'quiz') {
+      ok = await checkPass(pwInput.value, QUIZ_HASH) || await checkPass(pwInput.value, TEAM_HASH);
+    } else {
+      ok = await checkPass(pwInput.value, TEAM_HASH);
+    }
+    if (ok) {
       sessionStorage.setItem(target === 'quiz' ? 'quizUnlocked' : 'adminOK', '1');
       if(target === 'quiz')
         sessionStorage.setItem('quizUser', nameInput.value.trim());
@@ -276,4 +301,38 @@ async function checkPass(pw, hash) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
   const hex = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
   return hex === hash;
+}
+
+/* ----- logo swap on scroll ----- */
+const navLogo = document.querySelector('.nav-logo');
+if (navLogo) {
+  const onScroll = () => {
+    if (window.scrollY > 50) document.body.classList.add('logo-small');
+    else document.body.classList.remove('logo-small');
+  };
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+}
+
+/* ----- triangle interaction ----- */
+const triButtons = document.querySelectorAll('.tri-btn');
+const triInfo = document.querySelector('.tri-info');
+const triWrap = document.getElementById('principleTri');
+if(triButtons.length && triWrap){
+  triButtons.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      triButtons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const ang = btn.dataset.angle || '0deg';
+      triWrap.style.setProperty('--rot', ang);
+      triWrap.classList.add('info-on');
+      const key = btn.dataset.key;
+      if(triInfo){
+        triInfo.querySelector('h3').dataset.i18n = key;
+        triInfo.querySelector('p').dataset.i18n = key + 'Desc';
+        applyTranslations(document.documentElement.lang);
+      }
+    });
+  });
+  triButtons[0].click();
 }
