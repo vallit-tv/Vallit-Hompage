@@ -351,9 +351,11 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   margin-right: 2rem;
   text-decoration: none;
   color: var(--text);
-  display: block;
+  display: flex;
+  align-items: center;
   position: relative;
   width: 90px;
+  height: 24px;
   font-size: 1.1rem;
 }
 .nav-logo .logo-text,
@@ -428,8 +430,8 @@ body.logo-small .nav-logo .logo-img { opacity: 1; }
 .maintenance p { font-size: 1.1rem; margin-top: .8rem; }
 .pillars {
   position: relative;
-  width: 220px;
-  height: 160px;
+  width: 240px;
+  height: 150px;
   margin: 2rem auto;
 }
 .pillar-svg {
@@ -437,15 +439,14 @@ body.logo-small .nav-logo .logo-img { opacity: 1; }
   inset: 0;
   width: 100%;
   height: 100%;
+  z-index: 0;
 }
 .pillar-svg rect {
-  fill: none;
+  fill: var(--accent);
+  fill-opacity: .15;
   stroke: var(--accent);
   stroke-width: 2.5;
-  stroke-dasharray: 240;
-  stroke-dashoffset: 240;
   filter: drop-shadow(0 2px 6px rgba(0,0,0,.1));
-  animation: drawTri 1s ease forwards;
 }
 .pillar-btn {
   position: absolute;
@@ -457,6 +458,7 @@ body.logo-small .nav-logo .logo-img { opacity: 1; }
   transform: translate(-50%, -50%);
   cursor: pointer;
   transition: background .3s, transform .3s, border-color .3s;
+  z-index: 1;
 }
 .pillar-btn:hover { transform: translate(-50%, -60%); }
 .pillar-btn.active {
@@ -467,19 +469,18 @@ body.logo-small .nav-logo .logo-img { opacity: 1; }
 .p2 { left: 50%; top: 20%; }
 .p3 { left: 85%; top: 20%; }
 .pillar-info {
-  margin-top: 180px;
+  margin-top: 1.4rem;
   text-align: center;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity .4s ease, transform .4s ease;
+  position: relative;
+  z-index: 1;
 }
 .pillar-info h3 { margin: 0; font-size: 1.2rem; }
 .pillar-info p { margin-top: .6rem; font-size: .9rem; }
 .info-on .pillar-info { opacity: 1; transform: none; }
 
-@keyframes drawTri {
-  to { stroke-dashoffset: 0; }
-}
 .site-footer {
   margin-top: 3rem;
   padding: 2rem 2vw;
