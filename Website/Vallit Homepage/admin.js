@@ -4,6 +4,10 @@
 const KEY   = "vallitResponses";
 const PASS_HASH = "7e018a9c9db6ec835a53577b03fce1e2c032c040818b01de61bc4db1bd260605"; // sha-256 of password
 
+if(sessionStorage.getItem('adminOK') !== '1') {
+  location.href = 'index.html';
+}
+
 /* elements */
 const gate   = document.getElementById("loginBox");
 const mainEl = document.querySelector("main");

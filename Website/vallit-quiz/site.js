@@ -314,25 +314,23 @@ if (navLogo) {
   onScroll();
 }
 
-/* ----- triangle interaction ----- */
-const triButtons = document.querySelectorAll('.tri-btn');
-const triInfo = document.querySelector('.tri-info');
-const triWrap = document.getElementById('principleTri');
-if(triButtons.length && triWrap){
-  triButtons.forEach(btn=>{
+/* ----- pillar interaction ----- */
+const pillarButtons = document.querySelectorAll('.pillar-btn');
+const pillarInfo = document.querySelector('.pillar-info');
+const pillarWrap = document.getElementById('principleTri');
+if(pillarButtons.length && pillarWrap){
+  pillarButtons.forEach(btn=>{
     btn.addEventListener('click',()=>{
-      triButtons.forEach(b=>b.classList.remove('active'));
+      pillarButtons.forEach(b=>b.classList.remove('active'));
       btn.classList.add('active');
-      const ang = btn.dataset.angle || '0deg';
-      triWrap.style.setProperty('--rot', ang);
-      triWrap.classList.add('info-on');
+      pillarWrap.classList.add('info-on');
       const key = btn.dataset.key;
-      if(triInfo){
-        triInfo.querySelector('h3').dataset.i18n = key;
-        triInfo.querySelector('p').dataset.i18n = key + 'Desc';
+      if(pillarInfo){
+        pillarInfo.querySelector('h3').dataset.i18n = key;
+        pillarInfo.querySelector('p').dataset.i18n = key + 'Desc';
         applyTranslations(document.documentElement.lang);
       }
     });
   });
-  triButtons[0].click();
+  pillarButtons[0].click();
 }

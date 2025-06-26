@@ -351,17 +351,28 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   margin-right: 2rem;
   text-decoration: none;
   color: var(--text);
-  display: flex;
-  align-items: center;
+  display: block;
+  position: relative;
+  width: 90px;
   font-size: 1.1rem;
 }
+.nav-logo .logo-text,
 .nav-logo .logo-img {
-  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 24px;
+  display: flex;
+  align-items: center;
+  transition: opacity .2s ease;
+}
+.nav-logo .logo-text { opacity: 1; }
+.nav-logo .logo-img {
+  opacity: 0;
   stroke: var(--accent);
 }
-body.logo-small .nav-logo .logo-text { display: none; }
-body.logo-small .nav-logo .logo-img { display: block; }
+body.logo-small .nav-logo .logo-text { opacity: 0; }
+body.logo-small .nav-logo .logo-img { opacity: 1; }
 .mainnav a {
   text-decoration: none;
   color: var(--text);
@@ -415,30 +426,28 @@ body.logo-small .nav-logo .logo-img { display: block; }
   font-size: 2rem;
 }
 .maintenance p { font-size: 1.1rem; margin-top: .8rem; }
-.pillar {
+.pillars {
   position: relative;
-  width: 120px;
-  height: 200px;
+  width: 220px;
+  height: 160px;
   margin: 2rem auto;
-  --rot: 0deg;
 }
-.tri-svg {
+.pillar-svg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  transition: transform .6s ease;
 }
-.tri-svg rect {
+.pillar-svg rect {
   fill: none;
   stroke: var(--accent);
   stroke-width: 2.5;
-  stroke-dasharray: 360;
-  stroke-dashoffset: 360;
+  stroke-dasharray: 240;
+  stroke-dashoffset: 240;
   filter: drop-shadow(0 2px 6px rgba(0,0,0,.1));
   animation: drawTri 1s ease forwards;
 }
-.tri-btn {
+.pillar-btn {
   position: absolute;
   width: 28px;
   height: 28px;
@@ -449,24 +458,24 @@ body.logo-small .nav-logo .logo-img { display: block; }
   cursor: pointer;
   transition: background .3s, transform .3s, border-color .3s;
 }
-.tri-btn:hover { transform: translate(-50%, -60%); }
-.tri-btn.active {
+.pillar-btn:hover { transform: translate(-50%, -60%); }
+.pillar-btn.active {
   background: var(--accent);
   border-color: var(--accent);
 }
-.tri-q { left: 50%; top: 15%; }
-.tri-i { left: 50%; top: 50%; }
-.tri-t { left: 50%; top: 85%; }
-.tri-info {
-  margin-top: 220px;
+.p1 { left: 15%; top: 20%; }
+.p2 { left: 50%; top: 20%; }
+.p3 { left: 85%; top: 20%; }
+.pillar-info {
+  margin-top: 180px;
   text-align: center;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity .4s ease, transform .4s ease;
 }
-.tri-info h3 { margin: 0; font-size: 1.2rem; }
-.tri-info p { margin-top: .6rem; font-size: .9rem; }
-.info-on .tri-info { opacity: 1; transform: none; }
+.pillar-info h3 { margin: 0; font-size: 1.2rem; }
+.pillar-info p { margin-top: .6rem; font-size: .9rem; }
+.info-on .pillar-info { opacity: 1; transform: none; }
 
 @keyframes drawTri {
   to { stroke-dashoffset: 0; }
@@ -689,6 +698,7 @@ body.logo-small .nav-logo .logo-img { display: block; }
   border-radius: 6px;
   box-shadow: 0 4px 12px rgba(0,0,0,.1);
   padding: .4rem 0;
+  margin-top: 4px;
   z-index: 1100;
   opacity: 0;
   transform: translateY(-6px);
