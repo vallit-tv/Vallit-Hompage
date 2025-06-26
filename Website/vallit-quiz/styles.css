@@ -17,11 +17,11 @@ html {
 body.dark {
   --bg: #121212;
   --card: #1e1e1e;
-  --text: #f2f2f2;
+  --text: #e5e5e5;
   --border: #444;
-  --accent: #ccc;
+  --accent: #bbb;
   --gradient-start: #666;
-  --gradient-end: #aaa;
+  --gradient-end: #888;
 }
 body {
   margin: 0;
@@ -415,10 +415,10 @@ body.logo-small .nav-logo .logo-img { display: block; }
   font-size: 2rem;
 }
 .maintenance p { font-size: 1.1rem; margin-top: .8rem; }
-.triangle {
+.pillar {
   position: relative;
-  width: 280px;
-  height: 220px;
+  width: 120px;
+  height: 200px;
   margin: 2rem auto;
   --rot: 0deg;
 }
@@ -427,15 +427,14 @@ body.logo-small .nav-logo .logo-img { display: block; }
   inset: 0;
   width: 100%;
   height: 100%;
-  transform: rotate(var(--rot));
   transition: transform .6s ease;
 }
-.tri-svg polygon {
+.tri-svg rect {
   fill: none;
   stroke: var(--accent);
   stroke-width: 2.5;
-  stroke-dasharray: 520;
-  stroke-dashoffset: 520;
+  stroke-dasharray: 360;
+  stroke-dashoffset: 360;
   filter: drop-shadow(0 2px 6px rgba(0,0,0,.1));
   animation: drawTri 1s ease forwards;
 }
@@ -455,11 +454,11 @@ body.logo-small .nav-logo .logo-img { display: block; }
   background: var(--accent);
   border-color: var(--accent);
 }
-.tri-q { left: 50%; top: 10px; }
-.tri-i { left: 10px; bottom: 10px; }
-.tri-t { right: 10px; bottom: 10px; }
+.tri-q { left: 50%; top: 15%; }
+.tri-i { left: 50%; top: 50%; }
+.tri-t { left: 50%; top: 85%; }
 .tri-info {
-  margin-top: 230px;
+  margin-top: 220px;
   text-align: center;
   opacity: 0;
   transform: translateY(20px);
