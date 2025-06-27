@@ -1,6 +1,8 @@
 const darkToggle = document.getElementById("darkToggle");
 const langToggle = document.getElementById("langToggle");
 
+function init(){
+
 /* -------- translations -------- */
 const I18N = {
   en: {
@@ -323,7 +325,7 @@ if(pillarButtons.length && pillarWrap){
     btn.addEventListener('click',()=>{
       pillarButtons.forEach(b=>b.classList.remove('active'));
       btn.classList.add('active');
-      pillarWrap.classList.add('info-on');
+      pillarInfo.classList.add('show');
       const key = btn.dataset.key;
       if(pillarInfo){
         pillarInfo.querySelector('h3').dataset.i18n = key;
@@ -333,4 +335,12 @@ if(pillarButtons.length && pillarWrap){
     });
   });
   pillarButtons[0].click();
+}
+
+}
+
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
 }

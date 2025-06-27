@@ -15,10 +15,10 @@ html {
   scroll-behavior: smooth;
 }
 body.dark {
-  --bg: #121212;
-  --card: #1e1e1e;
-  --text: #e5e5e5;
-  --border: #444;
+  --bg: #161616;
+  --card: #222;
+  --text: #e0e0e0;
+  --border: #555;
   --accent: #bbb;
   --gradient-start: #666;
   --gradient-end: #888;
@@ -379,6 +379,9 @@ body.logo-small .nav-logo .logo-img { opacity: 1; }
   text-decoration: none;
   color: var(--text);
   font-size: 1rem;
+  display: flex;
+  align-items: center;
+  height: 24px;
 }
 .mainnav a:hover {
   text-decoration: underline;
@@ -474,12 +477,10 @@ body.logo-small .nav-logo .logo-img { opacity: 1; }
   opacity: 0;
   transform: translateY(20px);
   transition: opacity .4s ease, transform .4s ease;
-  position: relative;
-  z-index: 1;
 }
 .pillar-info h3 { margin: 0; font-size: 1.2rem; }
 .pillar-info p { margin-top: .6rem; font-size: .9rem; }
-.info-on .pillar-info { opacity: 1; transform: none; }
+.pillar-info.show { opacity: 1; transform: none; }
 
 .site-footer {
   margin-top: 3rem;

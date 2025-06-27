@@ -14,10 +14,10 @@ html {
   scroll-behavior: smooth;
 }
 body.dark {
-  --bg: #121212;
-  --card: #1e1e1e;
-  --text: #e5e5e5;
-  --border: #444;
+  --bg: #161616;
+  --card: #222;
+  --text: #e0e0e0;
+  --border: #555;
   --accent: #bbb;
   --gradient-start: #666;
   --gradient-end: #888;
@@ -358,6 +358,9 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   text-decoration: none;
   color: var(--text);
   font-size: .95rem;
+  display: flex;
+  align-items: center;
+  height: 24px;
 }
 .mainnav a:hover {
   text-decoration: underline;

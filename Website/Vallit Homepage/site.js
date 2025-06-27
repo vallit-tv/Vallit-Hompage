@@ -1,6 +1,8 @@
 const darkToggle = document.getElementById("darkToggle");
 const langToggle = document.getElementById("langToggle");
 
+function init(){
+
 /* -------- translations -------- */
 const I18N = {
   en: {
@@ -274,8 +276,22 @@ if (settingsBtn) {
   }
 }
 
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+
 async function checkPass(pw, hash) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
   const hex = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
   return hex === hash;
+}
+
+}
+
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
 }
