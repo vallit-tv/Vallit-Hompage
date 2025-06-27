@@ -1,6 +1,8 @@
 const darkToggle = document.getElementById("darkToggle");
 const langToggle = document.getElementById("langToggle");
 
+function init(){
+
 /* -------- translations -------- */
 const I18N = {
   en: {
@@ -146,8 +148,8 @@ if (langToggle) {
 }
 
 /* ----- settings dropdown ----- */
-// sha-256 hash of the password "Team_921"
-const QUIZ_HASH = 'b374a2c63426b7182f58d308d1834f65dbf72c1eaedfdfb788eee8bfe10ef1c5';
+// sha-256 hash of the password "Friend_0705"
+const QUIZ_HASH = '95f628534c5f2ecff6d37f934a54a846fa76952741a4928c843cc54ed0ca996e';
 const TEAM_HASH = '7e018a9c9db6ec835a53577b03fce1e2c032c040818b01de61bc4db1bd260605';
 const settingsBtn = document.getElementById('settingsBtn');
 
@@ -314,25 +316,31 @@ if (navLogo) {
   onScroll();
 }
 
-/* ----- triangle interaction ----- */
-const triButtons = document.querySelectorAll('.tri-btn');
-const triInfo = document.querySelector('.tri-info');
-const triWrap = document.getElementById('principleTri');
-if(triButtons.length && triWrap){
-  triButtons.forEach(btn=>{
+/* ----- pillar interaction ----- */
+const pillarButtons = document.querySelectorAll('.pillar-btn');
+const pillarInfo = document.querySelector('.pillar-info');
+const pillarWrap = document.getElementById('principleTri');
+if(pillarButtons.length && pillarWrap){
+  pillarButtons.forEach(btn=>{
     btn.addEventListener('click',()=>{
-      triButtons.forEach(b=>b.classList.remove('active'));
+      pillarButtons.forEach(b=>b.classList.remove('active'));
       btn.classList.add('active');
-      const ang = btn.dataset.angle || '0deg';
-      triWrap.style.setProperty('--rot', ang);
-      triWrap.classList.add('info-on');
+      pillarInfo.classList.add('show');
       const key = btn.dataset.key;
-      if(triInfo){
-        triInfo.querySelector('h3').dataset.i18n = key;
-        triInfo.querySelector('p').dataset.i18n = key + 'Desc';
+      if(pillarInfo){
+        pillarInfo.querySelector('h3').dataset.i18n = key;
+        pillarInfo.querySelector('p').dataset.i18n = key + 'Desc';
         applyTranslations(document.documentElement.lang);
       }
     });
   });
-  triButtons[0].click();
+  pillarButtons[0].click();
+}
+
+}
+
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
 }

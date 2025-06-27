@@ -1,14 +1,13 @@
 
 /* ---------- Vallit survey redesign ---------- */
 :root {
-  --bg: #F7F9FB;
+  --bg: #f8f8f8;
   --card: #ffffff;
-  --text: #1C1E20;
-  --border: #DCDFE2;
-  /* updated matte cyan accent */
-  --accent: #00A1B6;
-  --gradient-start: #2ABFD1;
-  --gradient-end: #00A1B6;
+  --text: #1c1c1c;
+  --border: #d0d0d0;
+  --accent: #444;
+  --gradient-start: #888;
+  --gradient-end: #444;
   --error: #FF5E5E;
   --topbar-h: 56px;
 }
@@ -16,10 +15,13 @@ html {
   scroll-behavior: smooth;
 }
 body.dark {
-  --bg: #1C1E20;
-  --card: #1C1E20;
-  --text: #f5f6f7;
-  --border: #333333;
+  --bg: #161616;
+  --card: #222;
+  --text: #e0e0e0;
+  --border: #555;
+  --accent: #bbb;
+  --gradient-start: #666;
+  --gradient-end: #888;
 }
 body {
   margin: 0;
@@ -351,19 +353,35 @@ button:hover { transform: translateY(-2px); opacity: .95; }
   color: var(--text);
   display: flex;
   align-items: center;
+  position: relative;
+  width: 90px;
+  height: 24px;
   font-size: 1.1rem;
 }
+.nav-logo .logo-text,
 .nav-logo .logo-img {
-  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 24px;
+  display: flex;
+  align-items: center;
+  transition: opacity .2s ease;
+}
+.nav-logo .logo-text { opacity: 1; }
+.nav-logo .logo-img {
+  opacity: 0;
   stroke: var(--accent);
 }
-body.logo-small .nav-logo .logo-text { display: none; }
-body.logo-small .nav-logo .logo-img { display: block; }
+body.logo-small .nav-logo .logo-text { opacity: 0; }
+body.logo-small .nav-logo .logo-img { opacity: 1; }
 .mainnav a {
   text-decoration: none;
   color: var(--text);
   font-size: 1rem;
+  display: flex;
+  align-items: center;
+  height: 24px;
 }
 .mainnav a:hover {
   text-decoration: underline;
@@ -413,59 +431,57 @@ body.logo-small .nav-logo .logo-img { display: block; }
   font-size: 2rem;
 }
 .maintenance p { font-size: 1.1rem; margin-top: .8rem; }
-.triangle {
+.pillars {
   position: relative;
-  width: 260px;
-  height: 200px;
+  width: 240px;
+  height: 150px;
   margin: 2rem auto;
-  --rot: 0deg;
 }
-.tri-svg {
+.pillar-svg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  transform: rotate(var(--rot));
-  transition: transform .6s ease;
+  z-index: 0;
 }
-.tri-svg polygon {
-  fill: none;
+.pillar-svg rect {
+  fill: var(--accent);
+  fill-opacity: .15;
   stroke: var(--accent);
-  stroke-width: 2;
-  stroke-dasharray: 520;
-  stroke-dashoffset: 520;
-  animation: drawTri 1s ease forwards;
+  stroke-width: 2.5;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.1));
 }
-.tri-btn {
+.pillar-btn {
   position: absolute;
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: var(--card);
   border: 2px solid var(--accent);
   transform: translate(-50%, -50%);
   cursor: pointer;
-  transition: background .3s, transform .3s;
+  transition: background .3s, transform .3s, border-color .3s;
+  z-index: 1;
 }
-.tri-btn:hover { transform: translate(-50%, -60%); }
-.tri-btn.active { background: var(--accent); }
-.tri-q { left: 50%; top: 10px; }
-.tri-i { left: 10px; bottom: 10px; }
-.tri-t { right: 10px; bottom: 10px; }
-.tri-info {
-  margin-top: 210px;
+.pillar-btn:hover { transform: translate(-50%, -60%); }
+.pillar-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.p1 { left: 15%; top: 20%; }
+.p2 { left: 50%; top: 20%; }
+.p3 { left: 85%; top: 20%; }
+.pillar-info {
+  margin-top: 1.4rem;
   text-align: center;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity .4s ease, transform .4s ease;
 }
-.tri-info h3 { margin: 0; font-size: 1.2rem; }
-.tri-info p { margin-top: .6rem; font-size: .9rem; }
-.info-on .tri-info { opacity: 1; transform: none; }
+.pillar-info h3 { margin: 0; font-size: 1.2rem; }
+.pillar-info p { margin-top: .6rem; font-size: .9rem; }
+.pillar-info.show { opacity: 1; transform: none; }
 
-@keyframes drawTri {
-  to { stroke-dashoffset: 0; }
-}
 .site-footer {
   margin-top: 3rem;
   padding: 2rem 2vw;
@@ -684,6 +700,7 @@ body.logo-small .nav-logo .logo-img { display: block; }
   border-radius: 6px;
   box-shadow: 0 4px 12px rgba(0,0,0,.1);
   padding: .4rem 0;
+  margin-top: 4px;
   z-index: 1100;
   opacity: 0;
   transform: translateY(-6px);

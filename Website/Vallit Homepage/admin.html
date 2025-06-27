@@ -41,6 +41,11 @@
     }
     #detailBox { white-space: pre-wrap; font-family: monospace; }
   </style>
+  <script>
+    if (sessionStorage.getItem('adminOK') !== '1') {
+      location.replace('index.html');
+    }
+  </script>
 </head>
 <body>
   <header class="topbar">

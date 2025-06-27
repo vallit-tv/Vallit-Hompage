@@ -77,8 +77,8 @@ const TEXT = {
 };
 // ---------------------------
 
-// sha-256 hash of the password "Team_921"
-const QUIZ_HASH = 'b374a2c63426b7182f58d308d1834f65dbf72c1eaedfdfb788eee8bfe10ef1c5';
+// sha-256 hash of the password "Friend_0705"
+const QUIZ_HASH = '95f628534c5f2ecff6d37f934a54a846fa76952741a4928c843cc54ed0ca996e';
 const gate   = document.getElementById('quizGate');
 const quizName = document.getElementById('quizName');
 const quizPw   = document.getElementById('quizPw');

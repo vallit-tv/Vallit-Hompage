@@ -1,6 +1,8 @@
 const darkToggle = document.getElementById("darkToggle");
 const langToggle = document.getElementById("langToggle");
 
+function init(){
+
 /* -------- translations -------- */
 const I18N = {
   en: {
@@ -128,8 +130,8 @@ if (langToggle) {
 }
 
 /* ----- settings dropdown ----- */
-// sha-256 hash of the password "Team_921"
-const QUIZ_HASH = 'b374a2c63426b7182f58d308d1834f65dbf72c1eaedfdfb788eee8bfe10ef1c5';
+// sha-256 hash of the password "Friend_0705"
+const QUIZ_HASH = '95f628534c5f2ecff6d37f934a54a846fa76952741a4928c843cc54ed0ca996e';
 const TEAM_HASH = '7e018a9c9db6ec835a53577b03fce1e2c032c040818b01de61bc4db1bd260605';
 const settingsBtn = document.getElementById('settingsBtn');
 
@@ -274,8 +276,22 @@ if (settingsBtn) {
   }
 }
 
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+
 async function checkPass(pw, hash) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
   const hex = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
   return hex === hash;
+}
+
+}
+
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
 }
